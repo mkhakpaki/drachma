@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support — Drachma</title>
+  <meta name="description" content="Help with Drachma: backups and moving phones, imports and scanning, budgets, goals, notifications and diagnostics — plus a real person to email.">
+  <link rel="canonical" href="https://mkhakpaki.github.io/drachma-site/support.html">
+  <meta name="theme-color" content="#FBF7F0">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+      if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+      if (t && t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">
+      <img src="assets/favicon.svg" alt="" width="30" height="30">
+      Drachma
+    </a>
+    <nav class="site-nav">
+      <a href="./#features">Features</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+      <button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Switch theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+  <header>
+    <p class="eyebrow">Support</p>
+    <h1 style="font-size:2.3rem">How can I help?</h1>
+    <p class="meta">Drachma is made by one person, so support is a real conversation: <a href="mailto:mkhakpaki.ksas@gmail.com">mkhakpaki.ksas@gmail.com</a>. Common answers below.</p>
+  </header>
+
+  <h2>Backups &amp; moving phones</h2>
+  <h3>How do I move to a new phone?</h3>
+  <p>Settings → Your data → <b>Back up</b>. Drachma writes one <b>.drachma</b> file, sealed with a passphrase you choose (minimum 8 characters). Move that file to the new phone however you prefer — cable, SD card, your own drive — then install Drachma and pick <b>Restore</b> during setup or in Settings. Restoring replaces what's on the phone with the backup's contents.</p>
+  <h3>I forgot my backup passphrase.</h3>
+  <p>There is genuinely no way around it — the file is encrypted with a key derived from that passphrase, and no copy of either exists anywhere else. That's the design that keeps strangers out of it; the cost is that it keeps everyone out, including me. If the original phone still has the data, make a fresh backup with a new passphrase.</p>
+  <h3>Are receipt photos in the backup?</h3>
+  <p>No — backups carry your numbers, categories, budgets, goals and progress. Receipt photos stay on the device they were captured on.</p>
+
+  <h2>Getting data in</h2>
+  <h3>Which statement formats can I import?</h3>
+  <p>PDF (including password-protected and scanned ones), CSV and XLSX. Parsing happens on your phone; nothing is uploaded. After parsing you review every entry before anything is saved, and Drachma flags likely duplicates of things you've already logged so nothing counts twice.</p>
+  <h3>Receipt scanning tips</h3>
+  <p>Flatten the receipt and let the scanner find the edges — recognition is fully on-device. Line items land in the entry, where you can fix names, quantities and categories; Drachma remembers your corrections and applies them next time.</p>
+  <h3>Can I share a file straight into Drachma?</h3>
+  <p>Yes — share a PDF, CSV, XLSX or a photo from any app and pick Drachma. It lands in the same review flow.</p>
+
+  <h2>Budgets, goals &amp; the coach</h2>
+  <h3>What's the buffer?</h3>
+  <p>Your monthly plan minus what you've allocated to envelopes. It's the flexible slack of the month: cover an envelope that ran over, or sweep what's left into a goal at month-end.</p>
+  <h3>Why did my streak say "healing" instead of resetting?</h3>
+  <p>Because one missed day shouldn't erase two months of effort. Log again and the streak knits itself back together. Drachma never shames — that's a design rule, not a mood.</p>
+
+  <h2>Notifications</h2>
+  <h3>When does Drachma ask for notification permission?</h3>
+  <p>Only at the moment you first earn one — never at app start. Every notification type (daily nudge, weekly recap, budget pace, goal milestones) has its own switch in Settings, and quiet hours are respected.</p>
+
+  <h2>Privacy &amp; diagnostics</h2>
+  <h3>How do I turn off crash reports or usage stats?</h3>
+  <p>Settings → Your data → switch off <b>Share crash reports</b> and/or <b>Share usage data</b>. It takes effect immediately. What these contain (and don't) is spelled out in the <a href="privacy.html">privacy policy</a>.</p>
+  <h3>How do I delete everything?</h3>
+  <p>Uninstall the app. The encrypted database and its device-bound key are destroyed with it, and there is no server copy. Any backups or exports you created are files under your control — delete those wherever you put them.</p>
+
+  <h2>Still stuck?</h2>
+  <p>Email <a href="mailto:mkhakpaki.ksas@gmail.com">mkhakpaki.ksas@gmail.com</a> with your device model and what you expected to happen. Screenshots help. You'll be talking to the person who wrote the code.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="./">
+        <img src="assets/favicon.svg" alt="" width="26" height="26">
+        Drachma
+      </a>
+      <nav>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of service</a>
+        <a href="mailto:mkhakpaki.ksas@gmail.com">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Made warmly, offline. Your money story stays yours.</p>
+      <p>© 2026 Mohammad Khakpaki.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var order = ["light", "dark", "oled"];
+    var icons = { light: "◐", dark: "◑", oled: "●" };
+    var btn = document.getElementById("themeToggle");
+    function current() { return document.documentElement.getAttribute("data-theme") || "light"; }
+    function apply(t) {
+      if (t === "light") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", t);
+      btn.textContent = icons[t];
+      try { localStorage.setItem("drachma-theme", t); } catch (e) {}
+    }
+    btn.textContent = icons[current()];
+    btn.addEventListener("click", function () {
+      apply(order[(order.indexOf(current()) + 1) % order.length]);
+    });
+  })();
+</script>
+
+</body>
+</html>

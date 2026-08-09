@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drachma — the warm, offline budget app</title>
+  <meta name="description" content="Drachma is a warm, offline-first budget app. Log an expense in about three seconds, plan with envelopes, reach goals with honest coaching — all encrypted on your phone. No account. No bank linking. No server.">
+  <link rel="canonical" href="https://mkhakpaki.github.io/drachma-site/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Drachma — the warm, offline budget app">
+  <meta property="og:description" content="Made warmly, offline. Your money story stays yours. No account, no bank linking, no server — everything encrypted on your phone.">
+  <meta property="og:url" content="https://mkhakpaki.github.io/drachma-site/">
+  <meta property="og:image" content="https://mkhakpaki.github.io/drachma-site/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#FBF7F0">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+      if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+      if (t && t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">
+      <img src="assets/favicon.svg" alt="" width="30" height="30">
+      Drachma
+    </a>
+    <nav class="site-nav">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+      <a href="support.html">Support</a>
+      <button class="theme-toggle" id="themeToggle" title="Theme: Light / Dark / OLED" aria-label="Switch theme">◐</button>
+      <a class="btn" href="#get">Get Drachma</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <p class="eyebrow">Private budgeting, made warmly</p>
+      <h1>Your money story stays yours.</h1>
+      <p class="lede">Drachma is a warm, offline-first budget app. Log an expense in about three seconds, plan with envelopes, reach goals with honest coaching — all encrypted on your phone. No account. No bank linking. No server.</p>
+      <div class="store-badges" id="get">
+        <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android" aria-label="Get it on Google Play">
+          <img src="assets/google-play-badge.png" alt="Get it on Google Play">
+        </a>
+        <a href="https://apps.apple.com/app/id0000000000" aria-label="Download on the App Store">
+          <img src="assets/app-store-badge.svg" alt="Download on the App Store">
+        </a>
+      </div>
+      <p class="badge-note">Free on Android and iOS · 40 currencies · Light, Dark and OLED themes</p>
+    </div>
+
+    <div class="phone-wrap" aria-hidden="true">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ps-status"><span>21:47</span><span>● ● ▮</span></div>
+          <div class="ps-body">
+            <div class="ps-greet">
+              <div>
+                <div class="g-title">Good evening, Maya</div>
+                <div class="g-sub">Sunday · 12-day streak going strong</div>
+              </div>
+              <div class="ps-avatar">M</div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-label">Monthly pace</div>
+              <div class="ps-amount numeric">$418.60</div>
+              <div class="ps-sub">safe to spend · 21 days left this month</div>
+              <div class="ps-bar"><i style="width:65%"></i></div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-label">Goals</div>
+              <div class="ps-row" style="margin-top:8px">
+                <svg class="ps-ring" width="54" height="54" viewBox="0 0 54 54">
+                  <circle cx="27" cy="27" r="23" fill="none" stroke="var(--budget-track)" stroke-width="6"/>
+                  <circle cx="27" cy="27" r="23" fill="none" stroke="var(--budget-safe)" stroke-width="6"
+                          stroke-linecap="round" stroke-dasharray="92.5 144.5"
+                          transform="rotate(-90 27 27)"/>
+                  <text x="27" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="var(--on-bg)">64%</text>
+                </svg>
+                <div>
+                  <div class="ps-goal-name">Emergency fund</div>
+                  <div class="ps-sub numeric">$1,920 of $3,000</div>
+                  <div class="ps-sub">on track for December</div>
+                </div>
+              </div>
+              <div class="ps-mini"><span class="n">Trip to Lisbon</span><span class="v numeric">$640 / $1,500</span></div>
+              <div class="ps-mini"><span class="n">New camera</span><span class="v numeric">$210 / $900</span></div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-row" style="justify-content:space-between">
+                <div>
+                  <div class="ps-label">Momentum</div>
+                  <div class="ps-sub ps-nowrap" style="margin-top:3px"><span class="ps-flame">🔥</span> 12-day streak · level 4</div>
+                </div>
+                <div class="ps-dots"><i></i><i></i><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div>
+              </div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-label">Budgets</div>
+              <div class="ps-mini"><span class="n">Groceries</span><span class="v numeric">$386 of $450</span></div>
+              <div class="ps-bar warn"><i style="width:86%"></i></div>
+              <div class="ps-mini"><span class="n">Eating out</span><span class="v numeric">$95 of $210</span></div>
+              <div class="ps-bar"><i style="width:45%"></i></div>
+            </div>
+          </div>
+
+          <div class="ps-tabs">
+            <div class="ps-tab active">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 4 9.6V20a1 1 0 0 0 1 1h5v-6h4v6h5a1 1 0 0 0 1-1V9.6Z"/></svg>
+              Home
+            </div>
+            <div class="ps-tab">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm10 7h4V8h-4Z"/></svg>
+              Budgets
+            </div>
+            <div class="ps-fab">+</div>
+            <div class="ps-tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/></svg>
+              Goals
+            </div>
+            <div class="ps-tab">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20V10h3v10Zm5.5 0V4h3v16ZM16 20v-7h3v7Z"/></svg>
+              Insights
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"/></svg>
+      Encrypted on your device
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.8 22.6 1.4 4.2 2.8 2.8l18.4 18.4ZM7.7 5.2 6.1 3.6A9.9 9.9 0 0 1 12 2a10 10 0 0 1 10 10 9.9 9.9 0 0 1-1.6 5.9l-1.5-1.6A8 8 0 0 0 12 4a8 8 0 0 0-4.3 1.2ZM12 22A10 10 0 0 1 2 12a9.9 9.9 0 0 1 1.3-4.9l1.5 1.5A8 8 0 0 0 12 20a8 8 0 0 0 3.4-.8l1.5 1.5A9.9 9.9 0 0 1 12 22Z"/></svg>
+      No account, no server
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4Zm0 4h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm3 5h4v2H7Z"/><path d="m21.5 1 1.4 1.4L2.4 23 1 21.6Z"/></svg>
+      No bank linking
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5Zm-1.5 15-3.7-3.7 1.4-1.4 2.3 2.3 5.3-5.3 1.4 1.4Z"/></svg>
+      Works fully offline
+    </div>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="container">
+    <p class="eyebrow">What it does</p>
+    <h2>Made for people who'd rather keep their money to themselves</h2>
+    <p class="section-lede">No feeds, no ads, no upsells mid-budget. Just the fastest honest way to know where your money goes — and a coach that celebrates wins at least as loudly as misses.</p>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="f-icon terracotta">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 21v-6.6H6.5L13 3v6.6h4.5Z"/></svg>
+        </div>
+        <h3>Log it in about three seconds</h3>
+        <p>A keypad-first flow tuned until it's muscle memory: quick-add tiles for your usual spots, "buy again" pills that prefill everything, and a pattern nudge that logs your routine coffee in one tap.</p>
+        <p class="f-quote">Amount, category, done.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon sage">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a1 1 0 0 1 1 1v3a2.5 2.5 0 0 0 0 5v3h-.001L21 19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a2.5 2.5 0 0 0 0-5V5a1 1 0 0 1 1-1Zm5 4v8h2V8Zm4 0v8h2V8Z"/></svg>
+        </div>
+        <h3>Envelopes with a buffer</h3>
+        <p>Split a monthly plan into envelopes and keep the rest as a flexible buffer. Run an envelope over? Cover it from the buffer in one tap. Amber means approaching, terracotta means over — never alarm red.</p>
+        <p class="f-quote">A coach, not a scold.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon honey">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+        </div>
+        <h3>Goals that tell the truth</h3>
+        <p>Rings, milestones, and an honest projected finish date — behind shows in honey, never red. Fund goals four ways: any-time top-ups, monthly earmarks, month-end buffer sweeps, and spare-change round-ups.</p>
+        <p class="f-quote">Confetti at 25, 50, 75 and 100%. 🎉</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon terracotta">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h4v2H5v2H3Zm14 0h4v4h-2V5h-2ZM3 17h2v2h2v2H3Zm16 0h2v4h-4v-2h2ZM7 7h10v3H7Zm0 4.5h10v2H7Zm0 3.5h7v2H7Z"/></svg>
+        </div>
+        <h3>Scan receipts, import statements</h3>
+        <p>Point the camera at a receipt and get line items — OCR runs entirely on your phone. Drop in bank statements as PDF, CSV or XLSX, and Drachma matches duplicates so nothing counts twice.</p>
+        <p class="f-quote">Your receipts never leave your phone.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon sage">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 3.05A9 9 0 1 0 20.95 13H11ZM13 2v9h9a9 9 0 0 0-9-9Z"/></svg>
+        </div>
+        <h3>Insights down to the item</h3>
+        <p>Not just "Groceries: a lot." See where each category goes, which items you buy most, your spending heatmap, and six-month trends — built from the line items on your actual receipts.</p>
+        <p class="f-quote">Item-level truth, zero judgment.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon honey">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c-4.4 0-8-3.6-8-8 0-3.5 2.2-5.6 4-7.5C9.6 4.8 11 3.3 11 1c0 0 7 3.5 7 10a4.9 4.9 0 0 1-.1 1c.7-.5 1.4-1.2 1.8-2.2 0 0 1.3 2.6 1.3 5.2A7 7 0 0 1 12 22Z"/></svg>
+        </div>
+        <h3>Momentum, never shame</h3>
+        <p>Streaks, XP and achievements that stay on your side. Miss a day and your streak is healing, not reset. Badges celebrate what you did — nothing nags about what you didn't.</p>
+        <p class="f-quote">Wins get celebrated louder than misses.</p>
+      </div>
+    </div>
+
+    <div class="chips">
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5Z"/></svg> Encrypted backups you own</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5Zm7-18L5.5 9H10v6h4V9h4.5Z" transform="rotate(180 12 11)"/></svg> CSV &amp; JSON export</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" transform="rotate(180 12 12)"/></svg> 40 currencies</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Zm0 16V5a7 7 0 0 1 0 14Z"/></svg> Light, Dark &amp; OLED themes</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 4h6v2H9Zm3 4a7 7 0 1 0 7 7 7 7 0 0 0-7-7Zm1 7h-2v-4h2Z"/></svg> Gentle reminders &amp; weekly recap</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l4 4 4-4H6a7 7 0 1 1 7 7 7 7 0 0 1-5-2.1L6.6 18.3A9 9 0 1 0 13 3Z"/></svg> Repeating entries</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5Zm0 12A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 16.5Z"/></svg> Reduced-motion support</span>
+    </div>
+  </div>
+</section>
+
+<section class="privacy-band" id="privacy">
+  <div class="container">
+    <div>
+      <p class="eyebrow">How Drachma works</p>
+      <h2>Offline-first is privacy-first.</h2>
+      <p class="big-quote">"Your money data never leaves this phone. There's no server to send it to. That's the whole design."</p>
+      <p>That's the first thing Drachma tells you when you open it — and the code keeps the promise. There is no sign-up, no bank connection, no sync service, and no company database with your spending in it.</p>
+      <p class="privacy-links">Read the plain-language <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms of service</a> — about a page each.</p>
+    </div>
+    <ul class="privacy-list">
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"/></svg>
+        <div><b>Encrypted on your device</b><p>Every expense, budget and goal lives in an encrypted database on your phone, with the key held in your device's secure hardware.</p></div>
+      </li>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5Z" opacity=".4"/><path d="m21.5 1 1.4 1.4L2.4 23 1 21.6Z"/></svg>
+        <div><b>No account, no bank linking</b><p>Nothing to sign up for, nothing to sync, nothing to leak. Backups are files you keep, sealed with a passphrase only you know.</p></div>
+      </li>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14a1 1 0 0 0 1-1v-6h-2v5H6V6h5V4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1Zm8-16v2h3.6l-7.3 7.3 1.4 1.4L18 7.4V11h2V4Z"/></svg>
+        <div><b>Yours to keep or delete</b><p>Export everything as CSV or JSON any time, or uninstall and it's gone. No copy survives you.</p></div>
+      </li>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 5v6.1c0 4.8 3.4 9.3 8 10.9 4.6-1.6 8-6.1 8-10.9V5Zm-1 13-3-3 1.4-1.4L11 12.2l3.6-3.6L16 10Z"/></svg>
+        <div><b>Honest about diagnostics</b><p>Anonymous crash reports and screen-usage stats help fix bugs — never amounts, merchants or categories, and you can switch both off in Settings.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="eyebrow">Questions</p>
+    <h2>Fair questions, straight answers</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Why doesn't Drachma connect to my bank?</summary>
+        <p>On purpose. Bank sync means a company holds your credentials and a server holds your transactions. Drachma is built for people burned by that trade — logging by hand takes about three seconds, and the act of typing it is what makes you notice it.</p>
+        <p>If you have a backlog, you don't have to type it all: import your bank's PDF, CSV or XLSX statement and Drachma parses it on your phone.</p>
+      </details>
+      <details>
+        <summary>What happens when I switch phones?</summary>
+        <p>Create a backup in Settings — a single <b>.drachma</b> file sealed with AES-256 encryption and a passphrase you choose. Move it however you like (cable, drive, your own cloud), install Drachma on the new phone, and restore. Nothing passes through us, because there is no us-side server.</p>
+      </details>
+      <details>
+        <summary>Does anything ever leave my phone?</summary>
+        <p>Your money data doesn't — there's no account and no server for it. Two optional diagnostics do, unless you turn them off in Settings: crash reports, and anonymous screen-usage stats limited to a fixed list of events like "entry logged with the keypad". Never amounts, merchants, categories or names. The <a href="privacy.html">privacy policy</a> lists every event.</p>
+      </details>
+      <details>
+        <summary>How much does it cost?</summary>
+        <p>Drachma is free. A paid Plus tier may arrive later for extras — billed through your app store, with the same privacy promise: your budget data never leaves your device, Plus included.</p>
+      </details>
+      <details>
+        <summary>Which platforms and currencies?</summary>
+        <p>Android and iOS, from one warm codebase. 40 currencies with proper symbols and formatting, week/month start days you control, and Light, Dark and true-black OLED themes.</p>
+      </details>
+      <details>
+        <summary>Is my data safe if my phone is lost?</summary>
+        <p>The database is encrypted with a key stored in your device's secure hardware, so it's protected by your phone's lock. Backups are sealed with your own passphrase — without it, they can't be opened. Choose a passphrase you'll remember: there's no reset, because nobody but you holds a key.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-card">
+      <h2>Start your money story tonight.</h2>
+      <p>Free on both stores. Three seconds to your first entry, and everything after that stays between you and your phone.</p>
+      <div class="store-badges">
+        <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android" aria-label="Get it on Google Play">
+          <img src="assets/google-play-badge.png" alt="Get it on Google Play">
+        </a>
+        <a href="https://apps.apple.com/app/id0000000000" aria-label="Download on the App Store">
+          <img src="assets/app-store-badge.svg" alt="Download on the App Store">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="./">
+        <img src="assets/favicon.svg" alt="" width="26" height="26">
+        Drachma
+      </a>
+      <nav>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of service</a>
+        <a href="mailto:mkhakpaki.ksas@gmail.com">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Made warmly, offline. Your money story stays yours.</p>
+      <p>© 2026 Mohammad Khakpaki. Google Play and the Google Play logo are trademarks of Google LLC. Apple, the Apple logo and App Store are trademarks of Apple Inc.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var order = ["light", "dark", "oled"];
+    var icons = { light: "◐", dark: "◑", oled: "●" };
+    var btn = document.getElementById("themeToggle");
+    function current() { return document.documentElement.getAttribute("data-theme") || "light"; }
+    function apply(t) {
+      if (t === "light") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", t);
+      btn.textContent = icons[t];
+      btn.title = "Theme: " + t.charAt(0).toUpperCase() + t.slice(1);
+      try { localStorage.setItem("drachma-theme", t); } catch (e) {}
+    }
+    btn.textContent = icons[current()];
+    btn.addEventListener("click", function () {
+      apply(order[(order.indexOf(current()) + 1) % order.length]);
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found — Drachma</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+      if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+      if (t && t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+<main class="doc" style="text-align:center; padding-top:110px">
+  <p class="eyebrow">404</p>
+  <h1 style="font-size:2.6rem; margin-bottom:14px">This page wandered off budget.</h1>
+  <p style="margin-bottom:28px">Whatever used to be here isn't — but everything that matters is one tap away.</p>
+  <a class="btn" href="./">Back to Drachma</a>
+</main>
+</body>
+</html>
