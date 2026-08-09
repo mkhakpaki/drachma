@@ -160,6 +160,12 @@ p  { color: var(--on-variant); }
 a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 .numeric {
   font-family: "Inter", system-ui, sans-serif;
   font-feature-settings: "tnum" 1, "lnum" 1;
@@ -178,12 +184,16 @@ a:hover { text-decoration: underline; }
 
 section { padding: 72px 0; }
 
+/* anchored sections land below the sticky header */
+[id] { scroll-margin-top: 84px; }
+
 /* ---------- Header ---------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
+  background: var(--bg);
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -514,6 +524,7 @@ details p + p { margin-top: 8px; }
 
 .doc { max-width: 760px; margin: 0 auto; padding: 56px 20px 90px; }
 .doc header { margin-bottom: 36px; }
+.doc header h1 { font-size: 2.3rem; }
 .doc header .eyebrow { margin-bottom: 12px; }
 .doc header p.meta { margin-top: 10px; font-size: .9rem; }
 .doc h2 { font-size: 1.45rem; margin: 40px 0 12px; }
@@ -545,6 +556,12 @@ details p + p { margin-top: 8px; }
 }
 .doc th { color: var(--on-bg); font-weight: 650; }
 .doc td { color: var(--on-variant); }
+
+/* ---------- 404 ---------- */
+
+.err-page { text-align: center; padding-top: 110px; }
+.err-page h1 { font-size: 2.6rem; margin-bottom: 14px; }
+.err-page .err-lede { margin-bottom: 28px; }
 
 /* ---------- Motion honors reduced-motion, like the app ---------- */
 

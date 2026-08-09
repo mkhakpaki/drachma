@@ -1,7 +1,7 @@
-# drachma-site
+# drachma (product site)
 
 Product website for **Drachma** — a warm, offline-first budget app for Android and iOS.
-Served via GitHub Pages at <https://mkhakpaki.github.io/drachma-site/>.
+Served via GitHub Pages at <https://mkhakpaki.github.io/drachma/>.
 
 Static HTML/CSS, no build step. The visual language mirrors the app's **Hearth** design
 system: the Terracotta & Sage palette, Fraunces (display) + Inter (body) variable fonts,

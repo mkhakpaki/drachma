@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Support — Drachma</title>
   <meta name="description" content="Help with Drachma: backups and moving phones, imports and scanning, budgets, goals, notifications and diagnostics — plus a real person to email.">
-  <link rel="canonical" href="https://mkhakpaki.github.io/drachma-site/support.html">
+  <link rel="canonical" href="https://mkhakpaki.github.io/drachma/support.html">
   <meta name="theme-color" content="#FBF7F0">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
@@ -31,8 +31,11 @@
     <nav class="site-nav">
       <a href="./#features">Features</a>
       <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="./#faq">FAQ</a>
       <a href="support.html">Support</a>
-      <button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Switch theme">◐</button>
+      <button class="theme-toggle" id="themeToggle" title="Theme: Light / Dark / OLED" aria-label="Switch theme">◐</button>
+      <a class="btn" href="./#get">Get Drachma</a>
     </nav>
   </div>
 </header>
@@ -40,7 +43,7 @@
 <main class="doc">
   <header>
     <p class="eyebrow">Support</p>
-    <h1 style="font-size:2.3rem">How can I help?</h1>
+    <h1>How can I help?</h1>
     <p class="meta">Drachma is made by one person, so support is a real conversation: <a href="mailto:mkhakpaki.ksas@gmail.com">mkhakpaki.ksas@gmail.com</a>. Common answers below.</p>
   </header>
 
@@ -111,6 +114,7 @@
       if (t === "light") document.documentElement.removeAttribute("data-theme");
       else document.documentElement.setAttribute("data-theme", t);
       btn.textContent = icons[t];
+      btn.title = "Theme: " + t.charAt(0).toUpperCase() + t.slice(1);
       try { localStorage.setItem("drachma-theme", t); } catch (e) {}
     }
     btn.textContent = icons[current()];
