@@ -19,6 +19,6 @@ Light / Dark / OLED themes, and reduced-motion support.
 
 - Legal doc versions track `LegalDocuments.kt` in the app repo — bump both together,
   since a version bump triggers in-app re-consent.
-- Store badge links: the Google Play URL is final; the App Store URL's numeric id is a
-  stand-in until the listing exists (same constant as the app's `ExternalLinks.ios.kt`).
+- Store badge links: the Google Play URL is final; the App Store id is the real one
+  (6801626534, same constant as the app's `ExternalLinks.ios.kt`).
 - Fonts are the same variable TTFs the app ships (OFL-licensed Fraunces & Inter).
