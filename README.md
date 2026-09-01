@@ -20,7 +20,12 @@ Light / Dark / OLED themes, and reduced-motion support.
 - Legal doc versions track `LegalDocuments.kt` in the app repo — bump both together,
   since a version bump triggers in-app re-consent.
 - Store badge links: the Google Play URL is final; the App Store badge uses the full
-  canonical listing URL (`/us/app/drachma-offline-budget-app/id6801626534`) — the short
-  `/app/id...` form did not resolve reliably. Id 6801626534 is the same constant as the
-  app's `ExternalLinks.ios.kt`.
+  canonical listing URL (`/us/app/drachma-offline-budget-app/id6801626534`). The short
+  `/app/id6801626534` form 301-redirects to it, picking the storefront by IP
+  geolocation; linking the canonical URL directly skips that hop and the geo lookup.
+  The `/us/` segment does not restrict anyone: on iOS the App Store app resolves the
+  universal link against the signed-in account's storefront, and the listing is live in
+  other storefronts (verified `/gb/` returns 200). Desktop web visitors outside the US
+  do see the US page. Id 6801626534 is the same constant as the app's
+  `ExternalLinks.ios.kt`.
 - Fonts are the same variable TTFs the app ships (OFL-licensed Fraunces & Inter).
