@@ -13,6 +13,7 @@ Light / Dark / OLED themes, and reduced-motion support.
 - `privacy.html` — plain-language privacy policy (version 2026-07)
 - `terms.html` — plain-language terms of service (version 2026-07)
 - `support.html` — help topics + contact
+- `get/index.html` — store smart-link: sniffs the UA, redirects to Play/App Store, forwards query params
 - `404.html`
 
 ## Notes
@@ -21,4 +22,5 @@ Light / Dark / OLED themes, and reduced-motion support.
   since a version bump triggers in-app re-consent.
 - Store badge links: the Google Play URL is final; the App Store id is the real one
   (6801626534, same constant as the app's `ExternalLinks.ios.kt`).
+  These live in `index.html` (hero + CTA) and `get/index.html` — update all three together.
 - Fonts are the same variable TTFs the app ships (OFL-licensed Fraunces & Inter).

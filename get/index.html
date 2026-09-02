@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Get Drachma</title>
+<meta name="theme-color" content="#FBF7F0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<style>
+  /* Hearth tokens — same palette as the rest of the site (see ../style.css).
+     System font stack on purpose: this page redirects immediately, so it
+     must not wait on the variable TTFs. */
+  :root{
+    --bg:#FBF7F0; --card:#FFFCF6; --fg:#2B2724; --muted:#5A5247;
+    --border:#D8CDB8; --link:#A85632;
+    --shadow:0 6px 30px rgba(43,39,36,.09);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1C1814; --card:#241F19; --fg:#EFE7DA; --muted:#CFC4B2;
+      --border:#4A4235; --link:#E8A583;
+      --shadow:0 6px 30px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1C1814; --card:#241F19; --fg:#EFE7DA; --muted:#CFC4B2;
+    --border:#4A4235; --link:#E8A583;
+    --shadow:0 6px 30px rgba(0,0,0,.4);
+  }
+  :root[data-theme="oled"]{
+    --bg:#000000; --card:#17130F; --fg:#EFE7DA; --muted:#CFC4B2;
+    --border:#40382C; --link:#E8A583;
+    --shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    /* min-height, not height: a fixed height would centre-clip the card's top
+       out of reach on short viewports (phone landscape). */
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:18px;
+    max-width:420px; width:100%; padding:32px 26px; text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .logo{
+    width:72px; height:72px; display:block; margin:0 auto 16px;
+  }
+  h1{font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+  .lede{color:var(--muted);margin:0 0 22px}
+  .badges{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .store-badge{display:inline-flex}
+  .store-badge img{display:block;width:180px;max-width:100%;height:auto}
+  .hint{margin-top:18px;font-size:13px;color:var(--muted)}
+  .hint a{color:var(--link)}
+</style>
+<script>
+  (function () {
+    var t = null;
+    try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+    /* Set the attribute even for "light": the dark @media block above keys off
+       :not([data-theme="light"]), so an explicit light choice must be recorded
+       or a dark OS would override it. */
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+</head>
+<body>
+<main class="card">
+  <img class="logo" src="../assets/icon-192.png" alt="" width="72" height="72">
+  <h1>Get Drachma</h1>
+  <p class="lede">The warm, offline budget app. Choose your store:</p>
+
+  <!-- Both badges are real markup so the page still works with JS off; the
+       script below only re-orders them and appends the incoming query. -->
+  <div class="badges" id="badges">
+    <a class="store-badge" id="playBadge"
+       href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android"
+       aria-label="Get it on Google Play">
+      <img src="../assets/google-play-badge.png" alt="Get it on Google Play" width="180" height="54">
+    </a>
+    <a class="store-badge" id="appStoreBadge"
+       href="https://apps.apple.com/app/id6801626534"
+       aria-label="Download on the App Store">
+      <img src="../assets/app-store-badge.svg" alt="Download on the App Store" width="180" height="60">
+    </a>
+  </div>
+
+  <div class="hint" id="hint">Open this link on your phone to install Drachma.</div>
+</main>
+<script>
+(function(){
+  var badges = document.getElementById("badges");
+  var playEl = document.getElementById("playBadge");
+  var appStoreEl = document.getElementById("appStoreBadge");
+  var hint = document.getElementById("hint");
+
+  // Preserve ALL incoming query params verbatim on redirect. The base URLs come
+  // from the markup, so the store links live in exactly one place.
+  var rawQuery = location.search.replace(/^\?/, "");
+  var PLAY_URL = playEl.href;            // already has ?id=…, so append with &
+  var APP_STORE_URL = appStoreEl.href;
+  var play = rawQuery ? PLAY_URL + "&" + rawQuery : PLAY_URL;
+  var appStore = APP_STORE_URL + location.search;
+  playEl.href = play;
+  appStoreEl.href = appStore;
+
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  // iPadOS 13+ masquerades as Mac; treat touch-capable Macs as iPad.
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && "ontouchend" in document);
+
+  // Build the hint with DOM calls, never innerHTML — `url` carries whatever
+  // query string the visitor arrived with.
+  function setHint(text, url){
+    hint.textContent = text + " ";
+    var a = document.createElement("a");
+    a.href = url;
+    a.textContent = "Open manually";
+    hint.appendChild(a);
+  }
+
+  if (isAndroid){
+    setHint("Taking you to Google Play…", play);
+    location.replace(play);
+  } else if (isIOS){
+    badges.insertBefore(appStoreEl, playEl);   // lead with the store they can use
+    setHint("Taking you to the App Store…", appStore);
+    location.replace(appStore);
+  }
+  // Desktop / everything else: leave the markup as served, redirect nowhere.
+})();
+</script>
+</body>
+</html>
