@@ -1,7 +1,8 @@
 # drachma (product site)
 
 Product website for **Drachma** — a warm, offline-first budget app for Android and iOS.
-Served via GitHub Pages at <https://mkhakpaki.github.io/drachma/>.
+Served via Cloudflare Pages at <https://trydrachma.com/>. During the domain move it is also
+still served via GitHub Pages at <https://mkhakpaki.github.io/drachma/> — both deploy from `main`.
 
 Static HTML/CSS, no build step. The visual language mirrors the app's **Hearth** design
 system: the Terracotta & Sage palette, Fraunces (display) + Inter (body) variable fonts,
@@ -24,3 +25,7 @@ Light / Dark / OLED themes, and reduced-motion support.
   (6801626534, same constant as the app's `ExternalLinks.ios.kt`).
   These live in `index.html` (hero + CTA) and `get/index.html` — update all three together.
 - Fonts are the same variable TTFs the app ships (OFL-licensed Fraunces & Inter).
+- Canonical / `og:` URLs point at `trydrachma.com` and are extensionless (`/privacy`, not
+  `/privacy.html`): Cloudflare Pages 308-redirects `.html` URLs to the extensionless form.
+- Keep every asset path relative while GitHub Pages is still live — the github.io copy sits
+  under `/drachma/`, so root-absolute paths (`/style.css`) would break it there.
