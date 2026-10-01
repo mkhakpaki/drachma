@@ -27,7 +27,7 @@
   (function () {
     var l = null;
     try { l = localStorage.getItem("drachma-lang"); } catch (e) {}
-    if (!l) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+    if (l !== "tr" && l !== "en") l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
     if (l !== "tr") return;
     document.documentElement.lang = "tr";
     document.title = "Sayfa bulunamadı · Drachma";

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Drachma: the private, offline budget app</title>
-  <meta name="description" content="Drachma is an offline-first budget app that finds your subscriptions and installment plans in the statements you already import, with no bank login, and shows the months ahead. Log expenses in seconds, plan with envelopes, reach your goals. Encrypted on your phone. No account. No server.">
+  <meta name="description" content="Private, offline budget app. Finds your subscriptions and installments in the statements you import, with no bank login. Encrypted on your phone.">
   <link rel="canonical" href="https://trydrachma.com/">
   <link rel="alternate" hreflang="en" href="https://trydrachma.com/">
   <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/">
@@ -12,6 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Drachma: the private, offline budget app">
   <meta property="og:description" content="Subscriptions and installments, found for you, with no bank login. Budgets, goals and receipts, encrypted on your phone. No account, no server.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="tr_TR">
   <meta property="og:url" content="https://trydrachma.com/">
   <meta property="og:image" content="https://trydrachma.com/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,13 +24,16 @@
   <link rel="manifest" href="site.webmanifest">
   <script>
     (function () {
-      var p = new URLSearchParams(location.search), l = p.get("lang");
-      try { if (l) localStorage.setItem("drachma-lang", l); else l = localStorage.getItem("drachma-lang"); } catch (e) {}
-      if (!l) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
-      p.delete("lang");
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null, canSave = true;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) { canSave = false; }
+      if (!l && (saved === "tr" || saved === "en")) l = saved;
+      // Follow the device only when a choice can be saved, or a Turkish device could never stay on English.
+      if (!l && canSave) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+      var had = p.has("lang"); p.delete("lang");
       var q = p.toString() ? "?" + p.toString() : "";
       if (l === "tr") location.replace("tr/" + q + location.hash);
-      else if (location.search.indexOf("lang=") > -1) history.replaceState(null, "", location.pathname + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
     })();
   </script>
   <link rel="stylesheet" href="style.css">
@@ -566,6 +571,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>

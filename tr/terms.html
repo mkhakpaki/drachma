@@ -15,12 +15,14 @@
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
   <script>
     (function () {
-      var p = new URLSearchParams(location.search), l = p.get("lang");
-      try { if (l) localStorage.setItem("drachma-lang", l); else l = localStorage.getItem("drachma-lang"); } catch (e) {}
-      p.delete("lang");
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) {}
+      if (!l) l = saved;
+      var had = p.has("lang"); p.delete("lang");
       var q = p.toString() ? "?" + p.toString() : "";
       if (l === "en") location.replace("../terms.html" + q + location.hash);
-      else if (location.search.indexOf("lang=") > -1) history.replaceState(null, "", location.pathname + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
     })();
   </script>
   <link rel="stylesheet" href="../style.css">
@@ -165,6 +167,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>

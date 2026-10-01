@@ -104,8 +104,8 @@
 
   // Same language rule as the rest of the site: a saved choice, else the device.
   var lang = null;
-  try { lang = new URLSearchParams(location.search).get("lang") || localStorage.getItem("drachma-lang"); } catch (e) {}
-  if (!lang) lang = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+  try { lang = (new URLSearchParams(location.search).get("lang") || localStorage.getItem("drachma-lang") || "").toLowerCase(); } catch (e) {}
+  if (lang !== "tr" && lang !== "en") lang = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
   var t = lang === "tr" ? {
     title: "Drachma'yı edin", lede: "Verilerin sende kalan bütçe uygulaması. Mağazanı seç:",
     hint: "Drachma'yı yüklemek için bu bağlantıyı telefonunda aç.", manual: "Elle aç",

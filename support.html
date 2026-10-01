@@ -15,13 +15,16 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <script>
     (function () {
-      var p = new URLSearchParams(location.search), l = p.get("lang");
-      try { if (l) localStorage.setItem("drachma-lang", l); else l = localStorage.getItem("drachma-lang"); } catch (e) {}
-      if (!l) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
-      p.delete("lang");
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null, canSave = true;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) { canSave = false; }
+      if (!l && (saved === "tr" || saved === "en")) l = saved;
+      // Follow the device only when a choice can be saved, or a Turkish device could never stay on English.
+      if (!l && canSave) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+      var had = p.has("lang"); p.delete("lang");
       var q = p.toString() ? "?" + p.toString() : "";
       if (l === "tr") location.replace("tr/support.html" + q + location.hash);
-      else if (location.search.indexOf("lang=") > -1) history.replaceState(null, "", location.pathname + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
     })();
   </script>
   <link rel="stylesheet" href="style.css">
@@ -164,6 +167,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>

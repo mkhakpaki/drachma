@@ -36,9 +36,11 @@ Light / Dark / OLED themes, and reduced-motion support.
 - Every English page has a Turkish twin under `tr/` with the same structure. Change copy in
   both; the Turkish voice is informal "sen" and uses the app's own Turkish terms.
 - Language choice: `?lang=en|tr` (what the header switcher and footer link use) is saved to
-  `localStorage["drachma-lang"]`, then stripped from the URL. With no saved choice, an English
-  page sends a device whose first language is Turkish to its `tr/` twin. Turkish pages only
-  redirect on a saved "en", so shared `/tr/` links and crawlers stay put.
+  `localStorage["drachma-lang"]` (any other value is ignored), then stripped from the URL. With
+  no saved choice, an English page sends a device whose first language is Turkish to its `tr/`
+  twin; it skips that when storage is blocked, so English stays reachable. Turkish pages only
+  redirect on a saved "en", so shared `/tr/` links and crawlers stay put. The switcher replaces
+  the current history entry, so Back doesn't land on a page that redirects away.
 - Each pair declares `hreflang` alternates (`x-default` = English). `tr/index.html` uses
   `assets/og-image-tr.png`.
 - `get/` and `404.html` are single pages that switch their few strings by the same rule.

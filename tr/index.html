@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Drachma: verilerin sende kalan bütçe uygulaması</title>
-  <meta name="description" content="Drachma, zaten içe aktardığın ekstrelerden aboneliklerini ve taksitlerini kendisi bulan, banka girişi istemeyen çevrimdışı bir bütçe uygulaması. Harcamalarını saniyeler içinde kaydet, zarflarla planla, hedeflerine ulaş. Her şey telefonunda şifreli. Hesap yok. Sunucu yok.">
+  <meta name="description" content="Verilerin sende kalan, çevrimdışı bütçe uygulaması. Aboneliklerini ve taksitlerini ekstrelerinden bulur, banka girişi istemez. Telefonunda şifreli.">
   <link rel="canonical" href="https://trydrachma.com/tr/">
   <link rel="alternate" hreflang="en" href="https://trydrachma.com/">
   <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/">
@@ -13,6 +13,7 @@
   <meta property="og:title" content="Drachma: verilerin sende kalan bütçe uygulaması">
   <meta property="og:description" content="Abonelikler ve taksitler senin için bulunur, banka girişi gerekmez. Bütçeler, hedefler ve fişler telefonunda şifreli. Hesap yok, sunucu yok.">
   <meta property="og:locale" content="tr_TR">
+  <meta property="og:locale:alternate" content="en_US">
   <meta property="og:url" content="https://trydrachma.com/tr/">
   <meta property="og:image" content="https://trydrachma.com/assets/og-image-tr.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -23,12 +24,14 @@
   <link rel="manifest" href="../site.webmanifest">
   <script>
     (function () {
-      var p = new URLSearchParams(location.search), l = p.get("lang");
-      try { if (l) localStorage.setItem("drachma-lang", l); else l = localStorage.getItem("drachma-lang"); } catch (e) {}
-      p.delete("lang");
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) {}
+      if (!l) l = saved;
+      var had = p.has("lang"); p.delete("lang");
       var q = p.toString() ? "?" + p.toString() : "";
       if (l === "en") location.replace("../" + q + location.hash);
-      else if (location.search.indexOf("lang=") > -1) history.replaceState(null, "", location.pathname + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
     })();
   </script>
   <link rel="stylesheet" href="../style.css">
@@ -117,7 +120,7 @@
                 </div>
               </div>
               <div class="ps-mini"><span class="n">Lizbon gezisi</span><span class="v numeric">₺16.000 / ₺37.500</span></div>
-              <div class="ps-mini"><span class="n">Yeni fotoğraf makinesi</span><span class="v numeric">₺5.250 / ₺22.500</span></div>
+              <div class="ps-mini"><span class="n">Fotoğraf makinesi</span><span class="v numeric">₺5.250 / ₺22.500</span></div>
             </div>
 
             <div class="ps-card">
@@ -229,8 +232,8 @@
             <span class="amt numeric">₺39,99</span>
           </div>
           <div class="mini-row">
-            <span class="av">S</span>
-            <span class="nm">Spor uygulaması<span class="meta alert">İptal edildi · yeniden çekim olursa haber verilir</span></span>
+            <span class="av">F</span>
+            <span class="nm">Fitness uygulaması<span class="meta alert">İptal edildi · yeniden çekim olursa haber verilir</span></span>
             <span class="amt numeric"><s>₺149,99</s></span>
           </div>
         </div>
@@ -566,6 +569,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>
