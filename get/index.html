@@ -10,7 +10,7 @@
 <link rel="icon" href="../assets/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <style>
-  /* Hearth tokens — same palette as the rest of the site (see ../style.css).
+  /* Hearth tokens: same palette as the rest of the site (see ../style.css).
      System font stack on purpose: this page redirects immediately, so it
      must not wait on the variable TTFs. */
   :root{
@@ -75,8 +75,8 @@
 <body>
 <main class="card">
   <img class="logo" src="../assets/icon-192.png" alt="" width="72" height="72">
-  <h1>Get Drachma</h1>
-  <p class="lede">The warm, offline budget app. Choose your store:</p>
+  <h1 id="title">Get Drachma</h1>
+  <p class="lede" id="lede">The private, offline budget app. Choose your store:</p>
 
   <!-- Both badges are real markup so the page still works with JS off; the
        script below only re-orders them and appends the incoming query. -->
@@ -102,6 +102,25 @@
   var appStoreEl = document.getElementById("appStoreBadge");
   var hint = document.getElementById("hint");
 
+  // Same language rule as the rest of the site: a saved choice, else the device.
+  var lang = null;
+  try { lang = new URLSearchParams(location.search).get("lang") || localStorage.getItem("drachma-lang"); } catch (e) {}
+  if (!lang) lang = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+  var t = lang === "tr" ? {
+    title: "Drachma'yı edin", lede: "Verilerin sende kalan bütçe uygulaması. Mağazanı seç:",
+    hint: "Drachma'yı yüklemek için bu bağlantıyı telefonunda aç.", manual: "Elle aç",
+    play: "Google Play'e yönlendiriliyorsun…", appStore: "App Store'a yönlendiriliyorsun…"
+  } : {
+    manual: "Open manually", play: "Taking you to Google Play…", appStore: "Taking you to the App Store…"
+  };
+  if (lang === "tr") {
+    document.documentElement.lang = "tr";
+    document.title = t.title;
+    document.getElementById("title").textContent = t.title;
+    document.getElementById("lede").textContent = t.lede;
+    hint.textContent = t.hint;
+  }
+
   // Preserve ALL incoming query params verbatim on redirect. The base URLs come
   // from the markup, so the store links live in exactly one place.
   var rawQuery = location.search.replace(/^\?/, "");
@@ -117,22 +136,22 @@
   // iPadOS 13+ masquerades as Mac; treat touch-capable Macs as iPad.
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && "ontouchend" in document);
 
-  // Build the hint with DOM calls, never innerHTML — `url` carries whatever
+  // Build the hint with DOM calls, never innerHTML; `url` carries whatever
   // query string the visitor arrived with.
   function setHint(text, url){
     hint.textContent = text + " ";
     var a = document.createElement("a");
     a.href = url;
-    a.textContent = "Open manually";
+    a.textContent = t.manual;
     hint.appendChild(a);
   }
 
   if (isAndroid){
-    setHint("Taking you to Google Play…", play);
+    setHint(t.play, play);
     location.replace(play);
   } else if (isIOS){
     badges.insertBefore(appStoreEl, playEl);   // lead with the store they can use
-    setHint("Taking you to the App Store…", appStore);
+    setHint(t.appStore, appStore);
     location.replace(appStore);
   }
   // Desktop / everything else: leave the markup as served, redirect nowhere.

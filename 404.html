@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page not found — Drachma</title>
+  <title>Page not found · Drachma</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
@@ -19,9 +19,22 @@
 <body>
 <main class="doc err-page">
   <p class="eyebrow">404</p>
-  <h1>This page wandered off budget.</h1>
-  <p class="err-lede">Whatever used to be here isn't — but everything that matters is one tap away.</p>
-  <a class="btn" href="./">Back to Drachma</a>
+  <h1 id="errTitle">This page wandered off budget.</h1>
+  <p class="err-lede" id="errLede">Whatever used to be here isn't, but everything that matters is one tap away.</p>
+  <a class="btn" id="errBack" href="./">Back to Drachma</a>
 </main>
+<script>
+  (function () {
+    var l = null;
+    try { l = localStorage.getItem("drachma-lang"); } catch (e) {}
+    if (!l) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+    if (l !== "tr") return;
+    document.documentElement.lang = "tr";
+    document.title = "Sayfa bulunamadı · Drachma";
+    document.getElementById("errTitle").textContent = "Bu sayfa bütçenin dışına çıktı.";
+    document.getElementById("errLede").textContent = "Burada ne vardıysa artık yok, ama önemli olan her şey bir dokunuş uzağında.";
+    document.getElementById("errBack").textContent = "Drachma'ya dön";
+  })();
+</script>
 </body>
 </html>

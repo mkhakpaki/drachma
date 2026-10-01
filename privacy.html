@@ -3,13 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy policy — Drachma</title>
+  <title>Privacy policy · Drachma</title>
   <meta name="description" content="Drachma's plain-language privacy policy. Your money data never leaves your phone: no account, no bank linking, no server. What little does leave (optional diagnostics) is listed here, in full.">
   <link rel="canonical" href="https://trydrachma.com/privacy">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/privacy">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/privacy">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/privacy">
   <meta name="theme-color" content="#FBF7F0">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = p.get("lang");
+      try { if (l) localStorage.setItem("drachma-lang", l); else l = localStorage.getItem("drachma-lang"); } catch (e) {}
+      if (!l) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+      p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "tr") location.replace("tr/privacy.html" + q + location.hash);
+      else if (location.search.indexOf("lang=") > -1) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
   <script>
     (function () {
@@ -29,11 +43,13 @@
       Drachma
     </a>
     <nav class="site-nav">
-      <a href="./#features">Features</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="./#subscriptions">Subscriptions</a>
+      <a class="nav-wide" href="./#features">Features</a>
+      <a href="./#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
       <a href="./#faq">FAQ</a>
-      <a href="support.html">Support</a>
+      <a class="nav-wide" href="support.html">Support</a>
+      <a class="lang-toggle" href="tr/privacy.html?lang=tr" hreflang="tr" lang="tr" title="Türkçe" aria-label="Türkçe">TR</a>
       <button class="theme-toggle" id="themeToggle" title="Theme: Light / Dark / OLED" aria-label="Switch theme">◐</button>
       <a class="btn" href="get/">Get Drachma</a>
     </nav>
@@ -44,15 +60,15 @@
   <header>
     <p class="eyebrow">Legal</p>
     <h1>Privacy policy</h1>
-    <p class="meta">Version 2026-08 · Last updated: 14 August 2026 · Applies to the Drachma app (Android and iOS) and this website.</p>
+    <p class="meta">Version 2026-10 · Last updated: 2 October 2026 · Applies to the Drachma app (Android and iOS) and this website.</p>
   </header>
 
   <div class="callout">
-    <p><b>The short version.</b> Your money data never leaves your phone. Drachma has no accounts, no bank connections and no server that stores your data. Everything you enter is encrypted on your device. The only things that can leave the device are optional diagnostics — crash reports and anonymous screen-usage counts from a fixed list — and you can switch both off in Settings at any time. We never see amounts, merchants, categories, notes or names.</p>
+    <p><b>The short version.</b> Your money data never leaves your phone. Drachma has no accounts, no bank connections and no server that stores your data. Everything you enter is encrypted on your device. The only things that can leave the device are optional diagnostics (crash reports and anonymous usage counts from a fixed list), and you can switch both off in Settings at any time. We never see amounts, merchants, categories, notes or names.</p>
   </div>
 
   <h2>1. Who is responsible</h2>
-  <p>Drachma is made by Mohammad Khakpaki, an independent developer. For anything in this policy, contact <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a>. I am the person responsible for the app's data handling — there is no company, data broker or analytics team behind it.</p>
+  <p>Drachma is made by Mohammad Khakpaki, an independent developer. For anything in this policy, contact <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a>. I am the person responsible for the app's data handling. There is no company, data broker or analytics team behind it.</p>
 
   <h2>2. The design: offline-first</h2>
   <p>Drachma is built so that your financial data cannot leak, because it is never collected. There is:</p>
@@ -62,15 +78,17 @@
     <li>no sync service and no cloud database,</li>
     <li>no advertising and no ad identifiers (advertising-ID collection is explicitly disabled at the system level).</li>
   </ul>
-  <p>The app works fully offline. Internet access exists only for the optional diagnostics described in section 5, for occasional in-app announcements (section 6), for checking a Drachma Plus subscription if you buy one (section 7), and for opening web pages like this one.</p>
+  <p>The app works fully offline. Internet access exists only for the optional diagnostics described in section 5, for occasional in-app announcements and app settings (section 6), for checking a Drachma Plus subscription if you buy one (section 7), and for opening web pages like this one.</p>
 
   <h2>3. What stays on your device</h2>
   <p>Everything you put into Drachma is stored in a local database on your phone, encrypted with SQLCipher (AES-256). The encryption key is generated on your device and protected by your device's secure hardware keystore; it never leaves the device and cannot be exported. This covers:</p>
   <ul>
-    <li>transactions — amounts, currency, dates, merchants, notes, line items and receipt photo references,</li>
+    <li>transactions: amounts, currency, dates, merchants, notes, line items and receipt photo references,</li>
     <li>categories, tags and your personal categorization rules,</li>
     <li>budgets, envelopes, buffer moves and monthly plans,</li>
     <li>goals, contributions, earmarks and round-ups,</li>
+    <li>subscriptions and installment plans Drachma finds or you add: names, amounts, renewal dates, which entries belong to them, cancelled marks and reminder choices,</li>
+    <li>your item tags, learned name spellings and the corrections Drachma learns from,</li>
     <li>streaks, XP and achievements,</li>
     <li>imported statement text while you review it (kept privately, cleaned up automatically).</li>
   </ul>
@@ -82,54 +100,61 @@
   <h2>5. Optional diagnostics (the only thing that can leave)</h2>
   <p>Drachma uses two Google Firebase services to keep the app working well. Both are <b>on by default</b> and both have their own switch in <b>Settings → Your data</b>. The app tells you this during onboarding, and switching either off takes effect immediately.</p>
   <h3>Crash reports (Firebase Crashlytics)</h3>
-  <p>If the app crashes, a technical report is sent so the bug can be fixed: stack trace, device model, OS version and app version. Crash reports never include your money data — it isn't in the app's crash context to begin with.</p>
+  <p>If the app crashes, a technical report is sent so the bug can be fixed: stack trace, device model, OS version and app version. Crash reports never include your money data; it isn't in the app's crash context to begin with.</p>
   <h3>Usage statistics (Firebase Analytics)</h3>
-  <p>Anonymous counts of which screens and features get used, so it's clear what to improve. These events are restricted in code to a fixed, closed list — the app is physically unable to log free text, amounts or merchant names into analytics. The complete list:</p>
+  <p>Anonymous counts of which screens and features get used, so it's clear what to improve. These events are restricted in code to a fixed, closed list: the app is physically unable to log free text, amounts or merchant names into analytics. The complete list:</p>
   <table>
     <tr><th>Event</th><th>What it says (and nothing more)</th></tr>
-    <tr><td>screen_view</td><td>Which of the app's 11 screens was opened (e.g. "home", "budgets", "settings")</td></tr>
-    <tr><td>onboarding_step / onboarding_completed</td><td>Progress through first-run setup</td></tr>
+    <tr><td>screen_view</td><td>Which of the app's 13 screens was opened (e.g. "home", "budgets", "settings")</td></tr>
+    <tr><td>onboarding_step / onboarding_completed</td><td>Progress through first-run setup (which step, by name)</td></tr>
     <tr><td>entry_logged</td><td>Method (keypad / scan / import) and type (expense / income)</td></tr>
-    <tr><td>scan_completed / import_completed</td><td>Outcome (success / cancelled / failed) and file kind (pdf / csv / xlsx / image)</td></tr>
+    <tr><td>scan_completed</td><td>Outcome (success / cancelled / failed)</td></tr>
+    <tr><td>import_completed</td><td>Outcome (success / cancelled / failed) and file kind (pdf / csv / xlsx / image)</td></tr>
+    <tr><td>statement_parsed</td><td>The shape of an imported statement, never its contents: account or card, file format, whether a header was found and the balance checked out, a row-count range (e.g. 6–20), a confidence level and the statement's language</td></tr>
     <tr><td>merge_resolved</td><td>Whether a duplicate pair was combined or kept separate</td></tr>
-    <tr><td>budget_wizard_completed / goal_created</td><td>That it happened — no names, no amounts</td></tr>
-    <tr><td>export_completed / backup_created / backup_restored</td><td>That it happened, and export format (csv / json)</td></tr>
-    <tr><td>notif_toggled / theme_changed</td><td>Which reminder was switched, and which theme was picked</td></tr>
+    <tr><td>budget_wizard_completed / goal_created</td><td>That it happened. No names, no amounts</td></tr>
+    <tr><td>export_completed</td><td>That it happened, and the format (csv / json)</td></tr>
+    <tr><td>backup_created / backup_restored</td><td>That it happened</td></tr>
+    <tr><td>notif_toggled / theme_changed</td><td>Which reminder was switched (daily, weekly, pace, goals or renewals) and on or off; which theme was picked</td></tr>
+    <tr><td>review_prompt_requested</td><td>That the app asked your store to show its rating prompt, the moment that triggered it (e.g. "goal milestone"), and whether the prompt opened. Drachma never learns whether or what you rated.</td></tr>
     <tr><td>announcement_shown / _cta / _dismissed</td><td>How an in-app announcement was received</td></tr>
   </table>
   <p>Advertising-ID collection and ad-personalization signals are disabled in the app's configuration. Diagnostics are processed by Google Firebase on Google's infrastructure under <a href="https://firebase.google.com/support/privacy">Google's Firebase privacy terms</a>.</p>
 
-  <h2>6. Announcements and push notifications</h2>
-  <p>Drachma can show occasional in-app notices ("what's new", or a required-update notice) fetched from Firebase Remote Config, and can receive broadcast announcements through Firebase Cloud Messaging. These are one-way broadcasts to all installs: the app subscribes to a public "announcements" topic and <b>does not</b> upload or store your push token anywhere on our side — there is no server of ours to send it to. Which announcements you've dismissed is remembered only on your device.</p>
-  <p>Everyday reminders — the daily nudge, weekly recap, budget pace notes and goal celebrations — are generated locally on your phone and respect your quiet hours. They never involve a network.</p>
+  <h2>6. Announcements, app settings and notifications</h2>
+  <p>Drachma can show occasional in-app notices ("what's new", or a required-update notice) fetched from Firebase Remote Config, and can receive broadcast announcements through Firebase Cloud Messaging. These are one-way broadcasts to all installs: the app subscribes to a public "announcements" topic and <b>does not</b> upload or store your push token anywhere on our side. There is no server of ours to send it to. Which announcements you've dismissed is remembered only on your device.</p>
+  <p>The same Remote Config channel delivers a few app settings: updates to the vocabulary Drachma uses to read statements, the Free plan's allowances, and when to suggest rating the app. It is a one-way download; nothing about you or your data goes back up.</p>
+  <p>Everyday notifications are generated locally on your phone and never involve a network: the daily nudge, the weekly recap, budget pace notes, goal celebrations, subscription renewal reminders (Drachma Plus), and an alert if a subscription you marked cancelled charges you again. Scheduled reminders that fall between 22:00 and 08:00 wait until 08:00, and pace notes are skipped during those hours.</p>
 
   <h2>7. Drachma Plus purchases (Adapty)</h2>
-  <p>If you subscribe to Drachma Plus, the payment itself is handled entirely by your app store (Google Play or the App Store) under its own terms — Drachma never sees your card or bank details. To know whether Plus is active, the app uses Adapty, a subscription-management service. Adapty receives the store's purchase information (product id, transaction id, subscription price and currency, trial and renewal state) and basic device information (model, OS and app version, locale), tied to a random, install-scoped identifier — never your name, email or anything you typed into the app. It never receives your budget data: no amounts you logged, no merchants, no categories, no goal names. If subscription state can't be checked (you're offline, the store is down), Drachma quietly falls back to the free tier — it never locks you out of your own numbers. Adapty processes this data under <a href="https://adapty.io/privacy/">Adapty's privacy policy</a>.</p>
+  <p>If you subscribe to Drachma Plus, the payment itself is handled entirely by your app store (Google Play or the App Store) under its own terms; Drachma never sees your card or bank details. To know whether Plus is active, the app uses Adapty, a subscription-management service. Adapty receives the store's purchase information (product id, transaction id, subscription price and currency, trial and renewal state) and basic device information (model, OS and app version, locale), tied to a random, install-scoped identifier, never your name, email or anything you typed into the app. It never receives your budget data: no amounts you logged, no merchants, no categories, no goal names. If subscription state can't be checked (you're offline, the store is down), Drachma quietly falls back to the free tier and never locks you out of your own numbers. Adapty processes this data under <a href="https://adapty.io/privacy/">Adapty's privacy policy</a>.</p>
 
   <h2>8. Backups: files you own</h2>
-  <p>When you create a backup, Drachma writes a single <b>.drachma</b> file to a location you pick. It is sealed with AES-256-GCM encryption; the key is derived from a passphrase you choose (PBKDF2-SHA256, 210,000 iterations, minimum 8 characters). The app never transmits this file. If you save it to your own cloud drive, that is between you and your cloud provider. Without your passphrase the file cannot be opened — by anyone, including me. Receipt photos are not included in backups.</p>
+  <p>When you create a backup, Drachma writes a single <b>.drachma</b> file to a location you pick. It is sealed with AES-256-GCM encryption; the key is derived from a passphrase you choose (PBKDF2-SHA256, 210,000 iterations, minimum 8 characters). The app never transmits this file. If you save it to your own cloud drive, that is between you and your cloud provider. Without your passphrase the file cannot be opened by anyone, including me. Receipt photos are not included in backups.</p>
 
   <h2>9. Exports: plain files, deliberately</h2>
-  <p>You can export your complete data as CSV or JSON from Settings, saved to a location you pick. Exports are <b>unencrypted on purpose</b> — they're for spreadsheets and your own archives — and the app warns you of exactly that when you export. Treat them like the private documents they are.</p>
+  <p>You can export your complete data as CSV or JSON from Settings, saved to a location you pick. Exports are <b>unencrypted on purpose</b>, because they're for spreadsheets and your own archives, and the app warns you of exactly that when you export. Treat them like the private documents they are.</p>
 
   <h2>10. Receipt scanning and statement import</h2>
-  <p>Receipt text recognition runs entirely on your device using a bundled, offline OCR model. The camera capture screen is provided by Google Play services' document scanner, which runs on-device (Play services may download the scanner module once). Bank statements (PDF, CSV, XLSX) are parsed locally; password-protected PDFs are opened locally with the password you type, which is used in memory and not stored. No receipt image, statement content or recognized text is ever transmitted.</p>
+  <p>Receipt text recognition runs entirely on your device using a bundled, offline OCR model. The camera capture screen is your phone's own document scanner (Google Play services on Android, Apple's on iPhone), which runs on-device; Play services may download its scanner module once. Bank statements (PDF, CSV, spreadsheets) and e-invoices are parsed locally; password-protected PDFs are opened locally with the password you type, which is used in memory and not stored.</p>
+  <p>Finding subscriptions and installment plans happens on your device too: Drachma compares your own entries with each other and with a list of known services built into the app. No receipt image, statement content, recognized text or detected subscription is ever transmitted.</p>
 
   <h2>11. Permissions</h2>
   <ul>
-    <li><b>Internet</b> — used only for the diagnostics, announcements and web pages described above.</li>
-    <li><b>Notifications</b> — asked for only at the moment you first earn a notification, never at app start. Declining simply means no reminders.</li>
-    <li>Drachma requests <b>no</b> camera, storage, media, location or contacts permissions. Receipt capture and photo picking use system components that don't require them.</li>
+    <li><b>Internet</b>: used only for the diagnostics, announcements and web pages described above.</li>
+    <li><b>Notifications</b>: asked for only when you first earn a notification or switch a reminder on, never at app start. Declining simply means no reminders.</li>
+    <li><b>Camera</b>: used only while you scan a receipt. If your phone's scanner needs camera access, your phone asks you first.</li>
+    <li>Drachma requests <b>no</b> storage, location or contacts permissions. Picking photos and files uses system components that don't require them.</li>
   </ul>
 
   <h2>12. Data retention and deletion</h2>
   <p>Your data lives exactly as long as you keep it. Delete any entry in the app, or delete everything by uninstalling: the encrypted database and its hardware-bound key are destroyed with the app, and there is no server-side copy to chase. Backups and exports you created are yours to keep or delete wherever you put them. Diagnostics already sent are retained by Firebase for its standard limited windows and are not tied to your identity. Subscription records live at your app store and at Adapty for as long as needed to manage the subscription.</p>
 
   <h2>13. Your rights</h2>
-  <p>Privacy laws like the GDPR give you rights of access, portability, correction and erasure. Drachma's design means you exercise almost all of them directly: your data is on your device, exportable in full as CSV/JSON, editable in the app, and erased by uninstalling. For anything about diagnostics — including "please make sure nothing of mine persists" — email <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a>.</p>
+  <p>Privacy laws like the GDPR give you rights of access, portability, correction and erasure. Drachma's design means you exercise almost all of them directly: your data is on your device, exportable in full as CSV/JSON, editable in the app, and erased by uninstalling. For anything about diagnostics, including "please make sure nothing of mine persists", email <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a>.</p>
 
   <h2>14. Children</h2>
-  <p>Drachma is not directed at children under 13 (or the equivalent minimum age in your country), and I do not knowingly collect personal data from children — by design, the app barely collects personal data from anyone. If you believe a child has used the app and something concerns you, please get in touch.</p>
+  <p>Drachma is not directed at children under 13 (or the equivalent minimum age in your country), and I do not knowingly collect personal data from children; by design, the app barely collects personal data from anyone. If you believe a child has used the app and something concerns you, please get in touch.</p>
 
   <h2>15. Changes to this policy</h2>
   <p>If this policy materially changes, the app will tell you: it tracks the version you agreed to and shows a review notice in Settings until you've read and accepted the update. The current version is always at the top of this page and at this address.</p>
@@ -150,10 +175,11 @@
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
         <a href="mailto:hi@trydrachma.com">Contact</a>
+        <a href="tr/privacy.html?lang=tr" hreflang="tr" lang="tr">Türkçe</a>
       </nav>
     </div>
     <div class="footer-legal">
-      <p>Made warmly, offline. Your money story stays yours.</p>
+      <p>Offline by design. Your money story stays yours.</p>
       <p>© 2026 Mohammad Khakpaki.</p>
     </div>
   </div>
