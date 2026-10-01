@@ -3,13 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Terms of service — Drachma</title>
-  <meta name="description" content="Drachma's plain-language terms of service — about a page, as promised.">
+  <title>Terms of service · Drachma</title>
+  <meta name="description" content="Drachma's plain-language terms of service: about a page, as promised.">
   <link rel="canonical" href="https://trydrachma.com/terms">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/terms">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/terms">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/terms">
   <meta name="theme-color" content="#FBF7F0">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null, canSave = true;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) { canSave = false; }
+      if (!l && (saved === "tr" || saved === "en")) l = saved;
+      // Follow the device only when a choice can be saved, or a Turkish device could never stay on English.
+      if (!l && canSave) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+      var had = p.has("lang"); p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "tr") location.replace("tr/terms.html" + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
   <script>
     (function () {
@@ -29,11 +46,13 @@
       Drachma
     </a>
     <nav class="site-nav">
-      <a href="./#features">Features</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="./#subscriptions">Subscriptions</a>
+      <a class="nav-wide" href="./#features">Features</a>
+      <a href="./#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
       <a href="./#faq">FAQ</a>
-      <a href="support.html">Support</a>
+      <a class="nav-wide" href="support.html">Support</a>
+      <a class="lang-toggle" href="tr/terms.html?lang=tr" hreflang="tr" lang="tr" title="Türkçe" aria-label="Türkçe">TR</a>
       <button class="theme-toggle" id="themeToggle" title="Theme: Light / Dark / OLED" aria-label="Switch theme">◐</button>
       <a class="btn" href="get/">Get Drachma</a>
     </nav>
@@ -44,52 +63,54 @@
   <header>
     <p class="eyebrow">Legal</p>
     <h1>Terms of service</h1>
-    <p class="meta">Version 2026-08 · Last updated: 14 August 2026 · Applies to the Drachma app (Android and iOS) and this website.</p>
+    <p class="meta">Version 2026-10 · Last updated: 2 October 2026 · Applies to the Drachma app (Android and iOS) and this website.</p>
   </header>
 
   <div class="callout">
-    <p><b>The short version.</b> Drachma is a personal budgeting tool. Your data is yours, and keeping backups of it is in your hands. Drachma shows you honest math about your own numbers — it is not financial advice. Use the app personally and fairly, and we'll get along fine.</p>
+    <p><b>The short version.</b> Drachma is a personal budgeting tool. Your data is yours, and keeping backups of it is in your hands. Drachma shows you honest math about your own numbers. It is not financial advice. Use the app personally and fairly, and we'll get along fine.</p>
   </div>
 
   <h2>1. Agreeing to these terms</h2>
-  <p>By installing or using Drachma you agree to these terms and to the <a href="privacy.html">privacy policy</a>. The app asks for this agreement explicitly during setup. If you don't agree, don't use the app — no hard feelings.</p>
+  <p>By installing or using Drachma you agree to these terms and to the <a href="privacy.html">privacy policy</a>. The app asks for this agreement explicitly during setup. If you don't agree, don't use the app. No hard feelings.</p>
 
   <h2>2. Who you're dealing with</h2>
   <p>Drachma is developed and published by Mohammad Khakpaki, an independent developer. Contact: <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a>.</p>
 
   <h2>3. Your license to use Drachma</h2>
-  <p>You get a personal, non-exclusive, non-transferable license to install and use Drachma on devices you own or control, for your own budgeting. Don't resell the app, rip out and redistribute its parts, or use it to build a competing dataset or service. Normal personal use — including exporting your own data anywhere you like — is exactly what it's for.</p>
+  <p>You get a personal, non-exclusive, non-transferable license to install and use Drachma on devices you own or control, for your own budgeting. Don't resell the app, rip out and redistribute its parts, or use it to build a competing dataset or service. Normal personal use, including exporting your own data anywhere you like, is exactly what it's for.</p>
 
   <h2>4. Your data is yours</h2>
   <p>Everything you enter into Drachma belongs to you. The app stores it encrypted on your device and gives you full exports (CSV/JSON) and encrypted backups on demand. Because there is no server copy, <b>you are the only person who can keep your data safe</b>:</p>
   <ul>
-    <li>make a backup before switching or wiping a phone — uninstalling destroys the local database permanently;</li>
-    <li>remember your backup passphrase — encrypted backups cannot be opened or reset without it, by anyone;</li>
+    <li>make a backup before switching or wiping a phone, because uninstalling destroys the local database permanently;</li>
+    <li>remember your backup passphrase, because encrypted backups cannot be opened or reset without it, by anyone;</li>
     <li>treat plain CSV/JSON exports as the private documents they are.</li>
   </ul>
 
   <h2>5. Not financial advice</h2>
   <p>Drachma does arithmetic on numbers you provide: budgets, paces, projections and insights are calculations, not recommendations. It is not a financial adviser, accountant, or tax tool, and its projections are honest estimates, not promises. Decisions about your money remain yours.</p>
+  <p>The same goes for what Drachma finds in your entries. Detected subscriptions, installment plans, renewal dates, price changes and reminders are best-effort readings of your own statements and receipts, which can be incomplete or wrong. Check with the provider or your bank before relying on them, for example before a cancellation deadline.</p>
 
   <h2>6. Fair use</h2>
   <p>Don't use Drachma to break the law, don't attempt to disrupt the app's services (such as its announcement channel), and don't misrepresent Drachma as your own work. That's the whole list.</p>
 
   <h2>7. Third-party services</h2>
-  <p>Drachma uses Google Firebase for optional crash reports, anonymous usage statistics, broadcast announcements and remote configuration (details and switches in the <a href="privacy.html">privacy policy</a>), Adapty for checking Drachma Plus subscription status, and Google Play services for the on-device document scanner. Your app store (Google Play or the App Store) handles distribution and all purchases under its own terms.</p>
+  <p>Drachma uses Google Firebase for optional crash reports, anonymous usage statistics, broadcast announcements and remote configuration (details and switches in the <a href="privacy.html">privacy policy</a>), Adapty for checking Drachma Plus subscription status, and your phone's own on-device document scanner. Your app store (Google Play or the App Store) handles distribution, its rating prompt, and all purchases under its own terms.</p>
 
   <h2>8. Price and Drachma Plus</h2>
-  <p>Drachma's core is free: logging your money, budgets, goals, insights basics and your data tools (export and backup) stay free. A paid subscription, <b>Drachma Plus</b>, unlocks more room — unlimited receipt scans and statement imports, the full Insights set, and unlimited envelopes and goals. Manual entry is never limited on any tier.</p>
-  <p>Plus is billed through your app store as an auto-renewing subscription: the price and billing period are shown in the app before you confirm, the subscription renews until cancelled, and you can cancel any time in your store's subscription settings — cancelling keeps Plus until the end of the period you've paid for. On a new device, "Restore purchases" in Settings brings an active subscription back. If the app can't verify a subscription for a moment (you're offline, the store hiccups), it falls back to the free tier rather than locking you out of your own numbers.</p>
+  <p>Drachma's core is free: logging your money, budgets, goals, installment plans, subscription detection, insights basics and your data tools (export and backup) stay free. The free plan includes allowances shown in the app: currently 30 receipt scans and 5 statement imports per install, up to 5 envelopes, 2 active goals and 3 tracked subscriptions. A paid subscription, <b>Drachma Plus</b>, removes those limits and adds the deeper Insights (Trends, Health check, Inside your baskets, Committed ahead, What a year costs) and subscription renewal reminders. Manual entry is never limited on any tier.</p>
+  <p>Free allowances may change over time. Reaching one only limits adding more; it never locks data you already have.</p>
+  <p>Plus is billed through your app store as an auto-renewing subscription: the price and billing period are shown in the app before you confirm, the subscription renews until cancelled, and you can cancel any time in your store's subscription settings. Cancelling keeps Plus until the end of the period you've paid for. On a new device, "Restore purchase" in Settings brings an active subscription back. If the app can't verify a subscription for a moment (you're offline, the store hiccups), it falls back to the free tier rather than locking you out of your own numbers.</p>
   <p>The privacy promise doesn't change with payment: your budget data never leaves your device, Plus included. How subscription status is checked is described in the <a href="privacy.html">privacy policy</a>.</p>
 
   <h2>9. Updates and required versions</h2>
-  <p>Drachma may occasionally require an update before continuing — for example when an old version has a serious bug or a data-format change. The app will tell you plainly and send you to your store. These terms cover the app as updated.</p>
+  <p>Drachma may occasionally require an update before continuing, for example when an old version has a serious bug or a data-format change. The app will tell you plainly and send you to your store. These terms cover the app as updated.</p>
 
   <h2>10. Intellectual property</h2>
-  <p>The app, its design system, artwork and name are © Mohammad Khakpaki. Your data is emphatically not mine — see section 4.</p>
+  <p>The app, its design system, artwork and name are © Mohammad Khakpaki. Your data is emphatically not mine (see section 4).</p>
 
   <h2>11. No warranty</h2>
-  <p>Drachma is provided <b>"as is"</b> and <b>"as available"</b>, without warranties of any kind, express or implied — including fitness for a particular purpose and non-infringement. I work hard to make it reliable, and the app nudges you to keep backups, but no software is perfect.</p>
+  <p>Drachma is provided <b>"as is"</b> and <b>"as available"</b>, without warranties of any kind, express or implied, including fitness for a particular purpose and non-infringement. I work hard to make it reliable, and the app nudges you to keep backups, but no software is perfect.</p>
 
   <h2>12. Limitation of liability</h2>
   <p>To the extent the law allows, I am not liable for indirect, incidental or consequential damages, or for lost data you had no backup of. Total liability is capped at the amount you paid for Drachma in the last 12 months. Nothing in these terms excludes liability that cannot lawfully be excluded, and mandatory consumer-protection rights in your country remain yours.</p>
@@ -101,7 +122,7 @@
   <p>If these terms materially change, the app tracks the version you agreed to and shows a review notice in Settings until you've read and accepted the update. The current version is always at this address.</p>
 
   <h2>15. Governing law</h2>
-  <p>These terms are governed by the laws of the developer's country of residence, without regard to conflict-of-law rules; mandatory consumer-protection law of your own country prevails where it applies. If something goes wrong, email me first — an honest conversation resolves most things faster than a court.</p>
+  <p>These terms are governed by the laws of the developer's country of residence, without regard to conflict-of-law rules; mandatory consumer-protection law of your own country prevails where it applies. If something goes wrong, email me first. An honest conversation resolves most things faster than a court.</p>
 
   <h2>16. Contact</h2>
   <p>Mohammad Khakpaki · <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a></p>
@@ -119,10 +140,11 @@
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
         <a href="mailto:hi@trydrachma.com">Contact</a>
+        <a href="tr/terms.html?lang=tr" hreflang="tr" lang="tr">Türkçe</a>
       </nav>
     </div>
     <div class="footer-legal">
-      <p>Made warmly, offline. Your money story stays yours.</p>
+      <p>Offline by design. Your money story stays yours.</p>
       <p>© 2026 Mohammad Khakpaki.</p>
     </div>
   </div>
@@ -146,6 +168,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>

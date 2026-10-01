@@ -3,13 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Support — Drachma</title>
-  <meta name="description" content="Help with Drachma: backups and moving phones, imports and scanning, budgets, goals, notifications and diagnostics — plus a real person to email.">
+  <title>Support · Drachma</title>
+  <meta name="description" content="Help with Drachma: backups and moving phones, imports and scanning, subscriptions and installments, Drachma Plus, budgets, goals, notifications and diagnostics, plus a real person to email.">
   <link rel="canonical" href="https://trydrachma.com/support">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/support">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/support">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/support">
   <meta name="theme-color" content="#FBF7F0">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null, canSave = true;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) { canSave = false; }
+      if (!l && (saved === "tr" || saved === "en")) l = saved;
+      // Follow the device only when a choice can be saved, or a Turkish device could never stay on English.
+      if (!l && canSave) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+      var had = p.has("lang"); p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "tr") location.replace("tr/support.html" + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
   <script>
     (function () {
@@ -29,11 +46,13 @@
       Drachma
     </a>
     <nav class="site-nav">
-      <a href="./#features">Features</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="./#subscriptions">Subscriptions</a>
+      <a class="nav-wide" href="./#features">Features</a>
+      <a href="./#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
       <a href="./#faq">FAQ</a>
-      <a href="support.html">Support</a>
+      <a class="nav-wide" href="support.html">Support</a>
+      <a class="lang-toggle" href="tr/support.html?lang=tr" hreflang="tr" lang="tr" title="Türkçe" aria-label="Türkçe">TR</a>
       <button class="theme-toggle" id="themeToggle" title="Theme: Light / Dark / OLED" aria-label="Switch theme">◐</button>
       <a class="btn" href="get/">Get Drachma</a>
     </nav>
@@ -49,35 +68,60 @@
 
   <h2>Backups &amp; moving phones</h2>
   <h3>How do I move to a new phone?</h3>
-  <p>Settings → Your data → <b>Back up</b>. Drachma writes one <b>.drachma</b> file, sealed with a passphrase you choose (minimum 8 characters). Move that file to the new phone however you prefer — cable, SD card, your own drive — then install Drachma and pick <b>Restore</b> during setup or in Settings. Restoring replaces what's on the phone with the backup's contents.</p>
+  <p>Settings → Your data → <b>Back up</b>. Drachma writes one <b>.drachma</b> file, sealed with a passphrase you choose (minimum 8 characters). Move that file to the new phone however you prefer (cable, SD card, your own drive), then install Drachma and pick <b>Restore</b> during setup or in Settings. Restoring replaces what's on the phone with the backup's contents.</p>
   <h3>I forgot my backup passphrase.</h3>
-  <p>There is genuinely no way around it — the file is encrypted with a key derived from that passphrase, and no copy of either exists anywhere else. That's the design that keeps strangers out of it; the cost is that it keeps everyone out, including me. If the original phone still has the data, make a fresh backup with a new passphrase.</p>
+  <p>There is genuinely no way around it: the file is encrypted with a key derived from that passphrase, and no copy of either exists anywhere else. That's the design that keeps strangers out of it; the cost is that it keeps everyone out, including me. If the original phone still has the data, make a fresh backup with a new passphrase.</p>
   <h3>Are receipt photos in the backup?</h3>
-  <p>No — backups carry your numbers, categories, budgets, goals and progress. Receipt photos stay on the device they were captured on.</p>
+  <p>No. Backups carry your numbers, categories, budgets, goals and progress. Receipt photos stay on the device they were captured on.</p>
 
   <h2>Getting data in</h2>
   <h3>Which statement formats can I import?</h3>
-  <p>PDF (including password-protected and scanned ones), CSV and XLSX. Parsing happens on your phone; nothing is uploaded. After parsing you review every entry before anything is saved, and Drachma flags likely duplicates of things you've already logged so nothing counts twice.</p>
+  <p>PDF (including password-protected and scanned ones), CSV and XLSX, plus Turkish e-Arşiv invoices. Parsing happens on your phone; nothing is uploaded. After parsing you review every entry before anything is saved. Rows Drachma is unsure about carry a gentle flag: edit them, tap "Looks right", or just glance and move on. Likely duplicates of things you've already logged offer "Combine", so nothing counts twice, and a combined entry keeps every source document.</p>
   <h3>Receipt scanning tips</h3>
-  <p>Flatten the receipt and let the scanner find the edges — recognition is fully on-device. Line items land in the entry, where you can fix names, quantities and categories; Drachma remembers your corrections and applies them next time.</p>
+  <p>Flatten the receipt and let the scanner find the edges; recognition is fully on-device. Line items land in the entry, where you can fix names, quantities and categories; Drachma remembers your corrections and applies them next time.</p>
   <h3>Can I share a file straight into Drachma?</h3>
-  <p>Yes — share a PDF, CSV, XLSX or a photo from any app and pick Drachma. It lands in the same review flow.</p>
+  <p>Yes. Share a PDF, CSV, XLSX or a photo from any app and pick Drachma. It lands in the same review flow.</p>
+
+  <h3>One shop shows up under three spellings.</h3>
+  <p>Use <b>Tidy names</b> to merge the spellings into one. Drachma remembers the name you chose and uses it next time, and suggests names as you type.</p>
+
+  <h2>Subscriptions &amp; installments</h2>
+  <h3>How does Drachma find my subscriptions?</h3>
+  <p>From your own entries: the same price on the same day each month, week or year, across your history and every new statement. Known services like Netflix, Spotify, Apple and Google are recognized by name. It all runs on your phone, with no bank connection.</p>
+  <h3>Something was picked up wrongly, or missed.</h3>
+  <p>Open the entry and link it to a subscription or installment plan, or unlink it. If a find isn't a subscription at all, say so and Drachma won't suggest it again.</p>
+  <h3>I cancelled a subscription.</h3>
+  <p>Open it in the Subscriptions space and mark it cancelled. If it ever charges you again, Drachma alerts you. On Free, cancelling also frees one of your 3 tracked slots.</p>
+  <h3>How do renewal reminders work?</h3>
+  <p>They're part of Drachma Plus. Switch on <b>Renewal reminders</b> in the Subscriptions space and choose how early: 1, 2, 3 or 7 days before. You can turn them off for any single subscription with "Remind me about this one".</p>
+  <h3>Drachma asked me "Renewal or purchase?"</h3>
+  <p>Without a bank connection, a statement can't always tell an in-app purchase from a subscription renewing at a new price, for example a charge on APPLE.COM/BILL two days before your iCloud renewal. In that rare case Drachma asks once, after the import, instead of guessing. Your answer decides whether the charge joins the subscription.</p>
+  <h3>Can I link an entry while adding it?</h3>
+  <p>Yes. The add-entry sheet has <b>Add to a subscription</b> and <b>Add to an installment plan</b>, right under the item breakdown. A typed entry only joins a subscription on its own when it matches that subscription's price.</p>
+  <h3>How are installment plans found?</h3>
+  <p>Drachma reads "3/6"-style lines on card statements, the way Turkish banks print them, and groups each plan's charges. When it isn't sure, it asks "Looks like an installment?". You can also link any expense to a plan by hand. Installments are free.</p>
+
+  <h2>Drachma Plus</h2>
+  <h3>What happens when I reach a Free limit?</h3>
+  <p>You keep everything you already have; the limit only applies to adding more. Manual entry is never limited. Free includes 30 receipt scans and 5 statement imports in total to get you started, up to 5 envelopes, 2 goals at a time and 3 tracked subscriptions. Finishing or archiving a goal, or cancelling a subscription, frees a slot.</p>
+  <h3>I bought Plus on another phone.</h3>
+  <p>Settings → Drachma Plus → <b>Restore purchase</b>, signed in to the same store account. To cancel, use your store's subscription settings; Plus stays on until the end of the period you paid for.</p>
 
   <h2>Budgets, goals &amp; the coach</h2>
   <h3>What's the buffer?</h3>
   <p>Your monthly plan minus what you've allocated to envelopes. It's the flexible slack of the month: cover an envelope that ran over, or sweep what's left into a goal at month-end.</p>
   <h3>Why did my streak say "healing" instead of resetting?</h3>
-  <p>Because one missed day shouldn't erase two months of effort. Log again and the streak knits itself back together. Drachma never shames — that's a design rule, not a mood.</p>
+  <p>Because one missed day shouldn't erase two months of effort. Log again and the streak knits itself back together. Drachma never shames. That's a design rule, not a mood.</p>
 
   <h2>Notifications</h2>
   <h3>When does Drachma ask for notification permission?</h3>
-  <p>Only at the moment you first earn one — never at app start. Every notification type (daily nudge, weekly recap, budget pace, goal milestones) has its own switch in Settings, and quiet hours are respected.</p>
+  <p>Only when you first earn one or switch a reminder on, never at app start. The daily nudge, weekly recap, budget pace notes and goal milestones each have their own switch in Settings; renewal reminders live in the Subscriptions space. Scheduled reminders wait until 08:00 rather than arrive overnight.</p>
 
   <h2>Privacy &amp; diagnostics</h2>
   <h3>How do I turn off crash reports or usage stats?</h3>
   <p>Settings → Your data → switch off <b>Share crash reports</b> and/or <b>Share usage data</b>. It takes effect immediately. What these contain (and don't) is spelled out in the <a href="privacy.html">privacy policy</a>.</p>
   <h3>How do I delete everything?</h3>
-  <p>Uninstall the app. The encrypted database and its device-bound key are destroyed with it, and there is no server copy. Any backups or exports you created are files under your control — delete those wherever you put them.</p>
+  <p>Uninstall the app. The encrypted database and its device-bound key are destroyed with it, and there is no server copy. Any backups or exports you created are files under your control; delete those wherever you put them.</p>
 
   <h2>Still stuck?</h2>
   <p>Email <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a> with your device model and what you expected to happen. Screenshots help. You'll be talking to the person who wrote the code.</p>
@@ -95,10 +139,11 @@
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
         <a href="mailto:hi@trydrachma.com">Contact</a>
+        <a href="tr/support.html?lang=tr" hreflang="tr" lang="tr">Türkçe</a>
       </nav>
     </div>
     <div class="footer-legal">
-      <p>Made warmly, offline. Your money story stays yours.</p>
+      <p>Offline by design. Your money story stays yours.</p>
       <p>© 2026 Mohammad Khakpaki.</p>
     </div>
   </div>
@@ -122,6 +167,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>

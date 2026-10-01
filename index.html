@@ -3,12 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Drachma — the warm, offline budget app</title>
-  <meta name="description" content="Drachma is a warm, offline-first budget app. Log an expense in about three seconds, plan with envelopes, reach goals with honest coaching — all encrypted on your phone. No account. No bank linking. No server.">
+  <title>Drachma: the private, offline budget app</title>
+  <meta name="description" content="Private, offline budget app. Finds your subscriptions and installments in the statements you import, with no bank login. Encrypted on your phone.">
   <link rel="canonical" href="https://trydrachma.com/">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Drachma — the warm, offline budget app">
-  <meta property="og:description" content="Made warmly, offline. Your money story stays yours. No account, no bank linking, no server — everything encrypted on your phone.">
+  <meta property="og:title" content="Drachma: the private, offline budget app">
+  <meta property="og:description" content="Subscriptions and installments, found for you, with no bank login. Budgets, goals and receipts, encrypted on your phone. No account, no server.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="tr_TR">
   <meta property="og:url" content="https://trydrachma.com/">
   <meta property="og:image" content="https://trydrachma.com/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -17,6 +22,20 @@
   <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null, canSave = true;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) { canSave = false; }
+      if (!l && (saved === "tr" || saved === "en")) l = saved;
+      // Follow the device only when a choice can be saved, or a Turkish device could never stay on English.
+      if (!l && canSave) l = /^tr(-|$)/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "tr" : "en";
+      var had = p.has("lang"); p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "tr") location.replace("tr/" + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
   <script>
     (function () {
@@ -36,11 +55,13 @@
       Drachma
     </a>
     <nav class="site-nav">
-      <a href="#features">Features</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="#subscriptions">Subscriptions</a>
+      <a class="nav-wide" href="#features">Features</a>
+      <a href="#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
       <a href="#faq">FAQ</a>
-      <a href="support.html">Support</a>
+      <a class="nav-wide" href="support.html">Support</a>
+      <a class="lang-toggle" href="tr/?lang=tr" hreflang="tr" lang="tr" title="Türkçe" aria-label="Türkçe">TR</a>
       <button class="theme-toggle" id="themeToggle" title="Theme: Light / Dark / OLED" aria-label="Switch theme">◐</button>
       <a class="btn" href="get/">Get Drachma</a>
     </nav>
@@ -50,9 +71,9 @@
 <section class="hero">
   <div class="container">
     <div class="hero-copy">
-      <p class="eyebrow">Private budgeting, made warmly</p>
+      <a class="new-pill" href="#subscriptions"><span class="tag">New in 1.7</span> Subscriptions &amp; installments, found for you <span class="arrow" aria-hidden="true">→</span></a>
       <h1>Your money story stays yours.</h1>
-      <p class="lede">Drachma is a warm, offline-first budget app. Log an expense in about three seconds, plan with envelopes, reach goals with honest coaching — all encrypted on your phone. No account. No bank linking. No server.</p>
+      <p class="lede">Drachma is an offline-first budget app. Log an expense in about three seconds, import a statement, and it finds your subscriptions and installment plans on its own. Budgets, goals and receipts, all encrypted on your phone. No account. No bank login. No server.</p>
       <div class="store-badges">
         <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android" aria-label="Get it on Google Play">
           <img src="assets/google-play-badge.png" alt="Get it on Google Play">
@@ -61,7 +82,7 @@
           <img src="assets/app-store-badge.svg" alt="Download on the App Store">
         </a>
       </div>
-      <p class="badge-note">Free on Android and iOS · 40 currencies · Light, Dark and OLED themes</p>
+      <p class="badge-note">Free on Android and iOS · Optional Plus · 8 languages · 40 currencies</p>
     </div>
 
     <div class="phone-wrap" aria-hidden="true">
@@ -105,12 +126,15 @@
             </div>
 
             <div class="ps-card">
-              <div class="ps-row" style="justify-content:space-between">
+              <div class="ps-row">
+                <span class="ps-sym">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>
+                </span>
                 <div>
-                  <div class="ps-label">Momentum</div>
-                  <div class="ps-sub ps-nowrap" style="margin-top:3px"><span class="ps-flame">🔥</span> 12-day streak · level 4</div>
+                  <div class="ps-label">Subscriptions</div>
+                  <div class="ps-sub" style="margin-top:2px"><b class="numeric ps-strong">$30.47</b> still to land this cycle</div>
+                  <div class="ps-sub ps-up">Spotify: up from $10.99 since September</div>
                 </div>
-                <div class="ps-dots"><i></i><i></i><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div>
               </div>
             </div>
 
@@ -169,11 +193,137 @@
   </div>
 </div>
 
+<section class="commitments" id="subscriptions">
+  <div class="container">
+    <p class="eyebrow">Subscriptions &amp; installments</p>
+    <h2>Know what's already spoken for.</h2>
+    <p class="section-lede">Drachma finds your subscriptions and installment plans on its own, in the statements you already import. No bank login. See how much of each month is already committed, catch price rises, and know if something you cancelled charges you again.</p>
+
+    <div class="commit-grid">
+      <article class="commit-card">
+        <div class="commit-head">
+          <span class="f-icon terracotta">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>
+          </span>
+          <div>
+            <h3>Subscriptions</h3>
+            <p>Spotted for you, then watched.</p>
+          </div>
+        </div>
+
+        <div class="mini" aria-hidden="true">
+          <div class="mini-top">
+            <span class="mini-label ico sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>Subscriptions</span>
+            <span class="mini-sub numeric">$365.64 a year</span>
+          </div>
+          <div class="mini-total numeric">$30.47 <small>a month</small></div>
+          <div class="share-bar"><i class="r1" style="width:51%"></i><i class="r2" style="width:39%"></i><i class="r3" style="width:10%"></i></div>
+          <div class="mini-row">
+            <span class="av r1">N</span>
+            <span class="nm">Netflix<span class="meta">Renews in 3 days</span></span>
+            <span class="amt numeric">$15.49</span>
+          </div>
+          <div class="mini-row">
+            <span class="av r2">S</span>
+            <span class="nm">Spotify<span class="meta up">Up from $10.99 since September</span></span>
+            <span class="amt numeric">$11.99</span>
+          </div>
+          <div class="mini-row">
+            <span class="av r3">i</span>
+            <span class="nm">iCloud+<span class="meta">Renews 18 Oct</span></span>
+            <span class="amt numeric">$2.99</span>
+          </div>
+          <div class="mini-row">
+            <span class="av">F</span>
+            <span class="nm">Fitness app<span class="meta alert">Cancelled · you'll hear if it charges again</span></span>
+            <span class="amt numeric"><s>$9.99</s></span>
+          </div>
+        </div>
+
+        <ul class="ticks">
+          <li><b>Found automatically.</b> Drachma spots what repeats in your history and in every new statement, and knows Netflix, Spotify, Apple, Google and more by name.</li>
+          <li><b>Price rises, flagged.</b> Know when a subscription quietly starts costing more.</li>
+          <li><b>Asks, doesn't guess.</b> When a statement can't tell a renewal from a one-off purchase, Drachma asks you once.</li>
+          <li><b>"I cancelled this."</b> Mark it cancelled, and Drachma tells you if it ever charges you again.</li>
+          <li><b>Renewal reminders</b><span class="plus-tag">Plus</span> A heads-up before something renews, so you can cancel in time.</li>
+        </ul>
+        <p class="plan-foot">Free tracks 3 subscriptions. Plus tracks all of them.</p>
+      </article>
+
+      <article class="commit-card">
+        <div class="commit-head">
+          <span class="f-icon sage">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2M8 17h2"/></svg>
+          </span>
+          <div>
+            <h3>Installments</h3>
+            <p>Taksit, understood.</p>
+          </div>
+        </div>
+
+        <div class="mini" aria-hidden="true">
+          <div class="mini-top">
+            <span class="mini-label ico inst"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Installments</span>
+            <span class="mini-sub numeric">₺850 frees up in January</span>
+          </div>
+          <div class="mini-total numeric">₺2,550 <small>committed each month</small></div>
+          <div class="mini-row">
+            <span class="av">L</span>
+            <span class="nm">Laptop<span class="meta numeric">₺6,600 paid · ₺6,600 left · ends Apr 2027</span></span>
+            <span class="amt numeric">₺1,100</span>
+          </div>
+          <div class="mini-row">
+            <span class="av">W</span>
+            <span class="nm">Washing machine<span class="meta numeric">₺3,400 paid · ₺1,700 left · ends Dec 2026</span></span>
+            <span class="amt numeric">₺850</span>
+          </div>
+          <div class="mini-row">
+            <span class="av">P</span>
+            <span class="nm">Phone<span class="meta numeric">₺1,800 paid · ₺5,400 left · ends Jul 2027</span></span>
+            <span class="amt numeric">₺600</span>
+          </div>
+          <div class="mini-free">Looks like an installment? <span class="numeric">MEDIAMARKT 2/4 · ₺625</span><span class="yn"><span>Yes</span><span>No</span></span></div>
+        </div>
+
+        <ul class="ticks">
+          <li><b>Finds plans by itself.</b> Drachma spots installment plans on your card statements and keeps each plan's payments together.</li>
+          <li><b>Paid, left, and when it ends.</b> See what's paid and what's left on every plan, how much each month is already committed, and when money frees up.</li>
+          <li><b>Asks when unsure.</b> If something only looks like an installment, Drachma checks with you first.</li>
+          <li><b>Your own plans too.</b> Add a plan by hand whenever you like.</li>
+        </ul>
+        <p class="plan-foot">Free for everyone.</p>
+      </article>
+    </div>
+
+    <div class="ahead">
+      <div class="ahead-copy">
+        <h3>See the months ahead <span class="plus-tag">Plus</span></h3>
+        <p>The next six months already spoken for, the month each plan ends, and what your subscriptions really cost in a year.</p>
+      </div>
+      <div class="mini ahead-chart" aria-hidden="true">
+        <div class="mini-top">
+          <span class="mini-label">Committed ahead</span>
+          <span class="mini-sub">Next 6 months</span>
+        </div>
+        <div class="chart">
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:58px"></i><span>Oct</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:58px"></i><span>Nov</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:58px"></i><span>Dec</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:33px"></i><b>frees up</b><span>Jan</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:33px"></i><span>Feb</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:33px"></i><span>Mar</span></div>
+        </div>
+        <div class="legend"><span class="sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>Subscriptions</span><span class="inst"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Installments</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="features" id="features">
   <div class="container">
     <p class="eyebrow">What it does</p>
     <h2>Made for people who'd rather keep their money to themselves</h2>
-    <p class="section-lede">No feeds, no ads, no upsells mid-budget. Just the fastest honest way to know where your money goes — and a coach that celebrates wins at least as loudly as misses.</p>
+    <p class="section-lede">No feeds, no ads, no bank login. Just the fastest honest way to know where your money goes, and a coach that celebrates wins at least as loudly as misses.</p>
 
     <div class="feature-grid">
       <div class="feature">
@@ -181,7 +331,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 21v-6.6H6.5L13 3v6.6h4.5Z"/></svg>
         </div>
         <h3>Log it in about three seconds</h3>
-        <p>A keypad-first flow tuned until it's muscle memory: quick-add tiles for your usual spots, "buy again" pills that prefill everything, and a pattern nudge that logs your routine coffee in one tap.</p>
+        <p>A keypad-first flow tuned until it's muscle memory: quick-add tiles for your usual spots, "buy again" pills that prefill everything, name suggestions that learn your spellings, and a pattern nudge that logs your routine coffee in one tap.</p>
         <p class="f-quote">Amount, category, done.</p>
       </div>
 
@@ -190,7 +340,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a1 1 0 0 1 1 1v3a2.5 2.5 0 0 0 0 5v3h-.001L21 19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a2.5 2.5 0 0 0 0-5V5a1 1 0 0 1 1-1Zm5 4v8h2V8Zm4 0v8h2V8Z"/></svg>
         </div>
         <h3>Envelopes with a buffer</h3>
-        <p>Split a monthly plan into envelopes and keep the rest as a flexible buffer. Run an envelope over? Cover it from the buffer in one tap. Amber means approaching, terracotta means over — never alarm red.</p>
+        <p>Split a monthly plan into envelopes and keep the rest as a flexible buffer. Run an envelope over? Cover it from the buffer in one tap. Amber means approaching, terracotta means over, never alarm red. Budget history shows your last six months.</p>
         <p class="f-quote">A coach, not a scold.</p>
       </div>
 
@@ -199,7 +349,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
         </div>
         <h3>Goals that tell the truth</h3>
-        <p>Rings, milestones, and an honest projected finish date — behind shows in honey, never red. Fund goals four ways: any-time top-ups, monthly earmarks, month-end buffer sweeps, and spare-change round-ups.</p>
+        <p>Rings, milestones, and an honest projected finish date; behind shows in honey, never red. Fund goals four ways: any-time top-ups, monthly earmarks, month-end buffer sweeps and spare-change round-ups. Each goal shows where its money comes from.</p>
         <p class="f-quote">Confetti at 25, 50, 75 and 100%. 🎉</p>
       </div>
 
@@ -208,7 +358,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h4v2H5v2H3Zm14 0h4v4h-2V5h-2ZM3 17h2v2h2v2H3Zm16 0h2v4h-4v-2h2ZM7 7h10v3H7Zm0 4.5h10v2H7Zm0 3.5h7v2H7Z"/></svg>
         </div>
         <h3>Scan receipts, import statements</h3>
-        <p>Point the camera at a receipt and get line items — OCR runs entirely on your phone. Drop in bank statements as PDF, CSV or XLSX, and Drachma matches duplicates so nothing counts twice.</p>
+        <p>Point the camera at a receipt and get every line item, read entirely on your phone. Drop in bank statements as PDF, CSV or Excel: Drachma matches duplicates so nothing counts twice, and picks out your subscriptions and installments as it reads.</p>
         <p class="f-quote">Your receipts never leave your phone.</p>
       </div>
 
@@ -217,7 +367,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 3.05A9 9 0 1 0 20.95 13H11ZM13 2v9h9a9 9 0 0 0-9-9Z"/></svg>
         </div>
         <h3>Insights down to the item</h3>
-        <p>Not just "Groceries: a lot." See where each category goes, which items you buy most, your spending heatmap, and six-month trends — built from the line items on your actual receipts.</p>
+        <p>Not just "Groceries: a lot." See where each category goes, where the month is heading and what changed since last time, with your subscriptions and installments at a glance. Plus adds six-month trends, a monthly health check, a look inside your baskets item by item, and the months ahead.</p>
         <p class="f-quote">Item-level truth, zero judgment.</p>
       </div>
 
@@ -226,7 +376,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c-4.4 0-8-3.6-8-8 0-3.5 2.2-5.6 4-7.5C9.6 4.8 11 3.3 11 1c0 0 7 3.5 7 10a4.9 4.9 0 0 1-.1 1c.7-.5 1.4-1.2 1.8-2.2 0 0 1.3 2.6 1.3 5.2A7 7 0 0 1 12 22Z"/></svg>
         </div>
         <h3>Momentum, never shame</h3>
-        <p>Streaks, XP and achievements that stay on your side. Miss a day and your streak is healing, not reset. Badges celebrate what you did — nothing nags about what you didn't.</p>
+        <p>Streaks, XP and achievements that stay on your side. Miss a day and your streak is healing, not reset. Badges celebrate what you did. Nothing nags about what you didn't.</p>
         <p class="f-quote">Wins get celebrated louder than misses.</p>
       </div>
     </div>
@@ -235,11 +385,59 @@
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5Z"/></svg> Encrypted backups you own</span>
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5Zm7-18L5.5 9H10v6h4V9h4.5Z" transform="rotate(180 12 11)"/></svg> CSV &amp; JSON export</span>
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" transform="rotate(180 12 12)"/></svg> 40 currencies</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9M12 3c-2.5 2.6-3.8 5.6-3.8 9s1.3 6.4 3.8 9"/></svg> 8 languages</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8l10 10-8 8L3 11Zm4.5 6A1.5 1.5 0 1 0 6 7.5 1.5 1.5 0 0 0 7.5 9Z"/></svg> Item tags</span>
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Zm0 16V5a7 7 0 0 1 0 14Z"/></svg> Light, Dark &amp; OLED themes</span>
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 4h6v2H9Zm3 4a7 7 0 1 0 7 7 7 7 0 0 0-7-7Zm1 7h-2v-4h2Z"/></svg> Gentle reminders &amp; weekly recap</span>
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l4 4 4-4H6a7 7 0 1 1 7 7 7 7 0 0 1-5-2.1L6.6 18.3A9 9 0 1 0 13 3Z"/></svg> Repeating entries</span>
       <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5Zm0 12A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 16.5Z"/></svg> Reduced-motion support</span>
     </div>
+  </div>
+</section>
+
+<section class="plans" id="plus">
+  <div class="container">
+    <p class="eyebrow">Free &amp; Plus</p>
+    <h2>Free covers everyday budgeting. Plus lifts the limits.</h2>
+    <p class="section-lede">No ads and no trial clock. Logging by hand is unlimited on every plan, always. Plus is for people who scan and import a lot, run many envelopes and goals, or want every subscription watched.</p>
+
+    <div class="plan-grid">
+      <div class="plan">
+        <div>
+          <div class="plan-name">Free</div>
+          <p class="plan-price">No time limit, no ads.</p>
+        </div>
+        <ul class="ticks">
+          <li><b>Unlimited manual entries</b>, always</li>
+          <li><b>30 receipt scans and 5 statement imports</b> in total, to get you started</li>
+          <li><b>Up to 5 envelopes and 2 goals</b> at a time; a finished goal frees its slot</li>
+          <li><b>Installments</b>, found and tracked, in full</li>
+          <li><b>3 subscriptions tracked</b>, with price-rise flags and the "charged again" alert</li>
+          <li><b>Insights</b>: where it goes, how the month is going, and your subscriptions and installments at a glance</li>
+          <li><b>Encrypted backups, CSV &amp; JSON export</b>, every theme and everyday reminders</li>
+        </ul>
+        <p class="plan-foot">Your data is never held back: backup and export stay free.</p>
+      </div>
+
+      <div class="plan plan-plus">
+        <div>
+          <div class="plan-name">Drachma Plus</div>
+          <p class="plan-price">Price shown in the app, in your store's currency, before you confirm.</p>
+        </div>
+        <ul class="ticks">
+          <li><b>Everything in Free</b></li>
+          <li><b>Unlimited receipt scans and statement imports</b></li>
+          <li><b>Unlimited envelopes, goals and subscriptions</b></li>
+          <li><b>The deep reads</b>: six-month trends, a monthly health check, and a look inside your baskets, item by item</li>
+          <li><b>Committed ahead</b>: the next six months already spoken for</li>
+          <li><b>What a year costs</b>: your subscriptions ranked by their yearly price</li>
+          <li><b>Renewal reminders</b> before each subscription renews</li>
+        </ul>
+        <p class="plan-foot">Start free. Upgrade any time in Settings → Drachma Plus.</p>
+      </div>
+    </div>
+
+    <p class="plan-note">Plus is billed by Google Play or the App Store and renews until you cancel in your store's subscription settings. It stays on until the end of the period you paid for, and "Restore purchase" brings it back on a new phone. Reaching a Free limit never locks what you already have. If Plus can't be checked, say because you're offline, Drachma falls back to Free. Paying doesn't change the privacy deal: your budget data never leaves your phone, Plus included.</p>
   </div>
 </section>
 
@@ -249,8 +447,8 @@
       <p class="eyebrow">How Drachma works</p>
       <h2>Offline-first is privacy-first.</h2>
       <p class="big-quote">"Your money data never leaves this phone. There's no server to send it to. That's the whole design."</p>
-      <p>That's the first thing Drachma tells you when you open it — and the code keeps the promise. There is no sign-up, no bank connection, no sync service, and no company database with your spending in it.</p>
-      <p class="privacy-links">Read the plain-language <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms of service</a> — about a page each.</p>
+      <p>That's the first thing Drachma tells you when you open it, and the code keeps the promise. There is no sign-up, no bank connection, no sync service, and no company database with your spending in it.</p>
+      <p class="privacy-links">Read the plain-language <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms of service</a>. About a page each.</p>
     </div>
     <ul class="privacy-list">
       <li>
@@ -259,7 +457,7 @@
       </li>
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5Z" opacity=".4"/><path d="m21.5 1 1.4 1.4L2.4 23 1 21.6Z"/></svg>
-        <div><b>No account, no bank linking</b><p>Nothing to sign up for, nothing to sync, nothing to leak. Backups are files you keep, sealed with a passphrase only you know.</p></div>
+        <div><b>No account, no bank linking</b><p>Nothing to sign up for, nothing to sync, nothing to leak. Subscriptions and installments come from the statements you import, read on your phone. Backups are files you keep, sealed with a passphrase only you know.</p></div>
       </li>
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14a1 1 0 0 0 1-1v-6h-2v5H6V6h5V4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1Zm8-16v2h3.6l-7.3 7.3 1.4 1.4L18 7.4V11h2V4Z"/></svg>
@@ -267,7 +465,7 @@
       </li>
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 5v6.1c0 4.8 3.4 9.3 8 10.9 4.6-1.6 8-6.1 8-10.9V5Zm-1 13-3-3 1.4-1.4L11 12.2l3.6-3.6L16 10Z"/></svg>
-        <div><b>Honest about diagnostics</b><p>Anonymous crash reports and screen-usage stats help fix bugs — never amounts, merchants or categories, and you can switch both off in Settings.</p></div>
+        <div><b>Honest about diagnostics</b><p>Anonymous crash reports and usage stats help fix bugs. Never amounts, merchants or categories, and you can switch both off in Settings.</p></div>
       </li>
     </ul>
   </div>
@@ -280,28 +478,37 @@
     <div class="faq-list">
       <details>
         <summary>Why doesn't Drachma connect to my bank?</summary>
-        <p>On purpose. Bank sync means a company holds your credentials and a server holds your transactions. Drachma is built for people burned by that trade — logging by hand takes about three seconds, and the act of typing it is what makes you notice it.</p>
-        <p>If you have a backlog, you don't have to type it all: import your bank's PDF, CSV or XLSX statement and Drachma parses it on your phone.</p>
+        <p>On purpose. Bank sync means a company holds your credentials and a server holds your transactions. Drachma is built for people burned by that trade: logging by hand takes about three seconds, and the act of typing it is what makes you notice it.</p>
+        <p>If you have a backlog, you don't have to type it all: import your bank statement and Drachma reads it on your phone, picking out subscriptions and installment plans as it goes.</p>
+      </details>
+      <details>
+        <summary>How does Drachma find my subscriptions without my bank?</summary>
+        <p>From the statements and receipts you already import, plus what you type. Drachma spots charges that repeat and knows popular services like Netflix, Spotify, Apple and Google by name. All of it happens on your phone.</p>
+      </details>
+      <details>
+        <summary>Does it understand installments (taksit)?</summary>
+        <p>Yes. Drachma recognizes installment plans on Turkish card statements, keeps each plan's payments together, and shows what's paid, what's left and when it ends. If it isn't sure, it asks you first. You can also add a plan by hand. Installments are free.</p>
       </details>
       <details>
         <summary>What happens when I switch phones?</summary>
-        <p>Create a backup in Settings — a single <b>.drachma</b> file sealed with AES-256 encryption and a passphrase you choose. Move it however you like (cable, drive, your own cloud), install Drachma on the new phone, and restore. Nothing passes through us, because there is no us-side server.</p>
+        <p>Create a backup in Settings: a single <b>.drachma</b> file sealed with AES-256 encryption and a passphrase you choose. Move it however you like (cable, drive, your own cloud), install Drachma on the new phone, and restore. Nothing passes through us, because there is no us-side server.</p>
       </details>
       <details>
         <summary>Does anything ever leave my phone?</summary>
-        <p>Your money data doesn't — there's no account and no server for it. Two optional diagnostics do, unless you turn them off in Settings: crash reports, and anonymous screen-usage stats limited to a fixed list of events like "entry logged with the keypad". Never amounts, merchants, categories or names. The <a href="privacy.html">privacy policy</a> lists every event.</p>
+        <p>Your money data doesn't: there's no account and no server for it. Two optional diagnostics do, unless you turn them off in Settings: crash reports, and anonymous usage stats limited to a fixed list of events like "entry logged with the keypad". Never amounts, merchants, categories or names. If you buy Plus, your app store and Adapty, the subscription service Drachma uses, confirm it and still never see your budget. The <a href="privacy.html">privacy policy</a> lists every event.</p>
       </details>
       <details>
         <summary>How much does it cost?</summary>
-        <p>Drachma is free. A paid Plus tier may arrive later for extras — billed through your app store, with the same privacy promise: your budget data never leaves your device, Plus included.</p>
+        <p>Drachma is free, with no ads and no time limit. Manual logging is unlimited on every plan. Free includes 30 receipt scans and 5 statement imports in total to get you started, up to 5 envelopes, 2 goals at a time and 3 tracked subscriptions.</p>
+        <p>Drachma Plus is an optional subscription that removes those limits and adds deeper Insights, a view of the months ahead, and renewal reminders. It's billed through your app store, and the price is shown in the app before you confirm. <a href="#plus">Compare Free and Plus</a>.</p>
       </details>
       <details>
-        <summary>Which platforms and currencies?</summary>
-        <p>Android and iOS, from one warm codebase. 40 currencies with proper symbols and formatting, week/month start days you control, and Light, Dark and true-black OLED themes.</p>
+        <summary>Which platforms, languages and currencies?</summary>
+        <p>Android and iOS. Drachma speaks English, Turkish, German, Spanish, French, Italian, Portuguese and Russian. It handles 40 currencies with proper symbols and formatting, lets you choose when your week and month start, and comes in Light, Dark and true-black OLED themes.</p>
       </details>
       <details>
         <summary>Is my data safe if my phone is lost?</summary>
-        <p>The database is encrypted with a key stored in your device's secure hardware, so it's protected by your phone's lock. Backups are sealed with your own passphrase — without it, they can't be opened. Choose a passphrase you'll remember: there's no reset, because nobody but you holds a key.</p>
+        <p>The database is encrypted with a key stored in your device's secure hardware, so it's protected by your phone's lock. Backups are sealed with your own passphrase; without it, they can't be opened. Choose a passphrase you'll remember: there's no reset, because nobody but you holds a key.</p>
       </details>
     </div>
   </div>
@@ -311,7 +518,7 @@
   <div class="container">
     <div class="cta-card">
       <h2>Start your money story tonight.</h2>
-      <p>Free on both stores. Three seconds to your first entry, and everything after that stays between you and your phone.</p>
+      <p>Free on both stores, with Plus if you want more room. Three seconds to your first entry, and everything after that stays between you and your phone.</p>
       <div class="store-badges">
         <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android" aria-label="Get it on Google Play">
           <img src="assets/google-play-badge.png" alt="Get it on Google Play">
@@ -336,10 +543,11 @@
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
         <a href="mailto:hi@trydrachma.com">Contact</a>
+        <a href="tr/?lang=tr" hreflang="tr" lang="tr">Türkçe</a>
       </nav>
     </div>
     <div class="footer-legal">
-      <p>Made warmly, offline. Your money story stays yours.</p>
+      <p>Offline by design. Your money story stays yours.</p>
       <p>© 2026 Mohammad Khakpaki. Google Play and the Google Play logo are trademarks of Google LLC. Apple, the Apple logo and App Store are trademarks of Apple Inc.</p>
     </div>
   </div>
@@ -363,6 +571,17 @@
       apply(order[(order.indexOf(current()) + 1) % order.length]);
     });
   })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
 </script>
 
 </body>

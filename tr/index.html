@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drachma: verilerin sende kalan bütçe uygulaması</title>
+  <meta name="description" content="Verilerin sende kalan, çevrimdışı bütçe uygulaması. Aboneliklerini ve taksitlerini ekstrelerinden bulur, banka girişi istemez. Telefonunda şifreli.">
+  <link rel="canonical" href="https://trydrachma.com/tr/">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Drachma: verilerin sende kalan bütçe uygulaması">
+  <meta property="og:description" content="Abonelikler ve taksitler senin için bulunur, banka girişi gerekmez. Bütçeler, hedefler ve fişler telefonunda şifreli. Hesap yok, sunucu yok.">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://trydrachma.com/tr/">
+  <meta property="og:image" content="https://trydrachma.com/assets/og-image-tr.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#FBF7F0">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) {}
+      if (!l) l = saved;
+      var had = p.has("lang"); p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "en") location.replace("../" + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+      if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+      if (t && t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">
+      <img src="../assets/favicon.svg" alt="" width="30" height="30">
+      Drachma
+    </a>
+    <nav class="site-nav">
+      <a href="#subscriptions">Abonelikler</a>
+      <a class="nav-wide" href="#features">Özellikler</a>
+      <a href="#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Gizlilik</a>
+      <a href="#faq">SSS</a>
+      <a class="nav-wide" href="support.html">Destek</a>
+      <a class="lang-toggle" href="../?lang=en" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
+      <button class="theme-toggle" id="themeToggle" title="Tema: Açık / Koyu / OLED" aria-label="Temayı değiştir">◐</button>
+      <a class="btn" href="../get/">İndir</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <a class="new-pill" href="#subscriptions"><span class="tag">1.7'de yeni</span> Abonelikler ve taksitler, senin için bulunur <span class="arrow" aria-hidden="true">→</span></a>
+      <h1>Para hikâyen hep senin kalır.</h1>
+      <p class="lede">Drachma çevrimdışı çalışan bir bütçe uygulaması. Bir harcamayı yaklaşık üç saniyede kaydet, ekstreni içe aktar; aboneliklerini ve taksitlerini kendisi bulsun. Bütçeler, hedefler ve fişler, hepsi telefonunda şifreli. Hesap yok. Banka girişi yok. Sunucu yok.</p>
+      <div class="store-badges">
+        <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android" aria-label="Google Play'den alın">
+          <img src="../assets/google-play-badge.png" alt="Google Play'den alın">
+        </a>
+        <a href="https://apps.apple.com/app/id6801626534" aria-label="App Store'dan indirin">
+          <img src="../assets/app-store-badge.svg" alt="App Store'dan indirin">
+        </a>
+      </div>
+      <p class="badge-note">Android ve iOS'ta ücretsiz · İsteğe bağlı Plus · 8 dil · 40 para birimi</p>
+    </div>
+
+    <div class="phone-wrap" aria-hidden="true">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ps-status"><span>21:47</span><span>● ● ▮</span></div>
+          <div class="ps-body">
+            <div class="ps-greet">
+              <div>
+                <div class="g-title">İyi akşamlar, Maya</div>
+                <div class="g-sub">Pazar · 12 günlük seri sürüyor</div>
+              </div>
+              <div class="ps-avatar">M</div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-label">Aylık tempo</div>
+              <div class="ps-amount numeric">₺14.860</div>
+              <div class="ps-sub">rahatça harcanabilir · bu ay 21 gün kaldı</div>
+              <div class="ps-bar"><i style="width:65%"></i></div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-label">Hedefler</div>
+              <div class="ps-row" style="margin-top:8px">
+                <svg class="ps-ring" width="54" height="54" viewBox="0 0 54 54">
+                  <circle cx="27" cy="27" r="23" fill="none" stroke="var(--budget-track)" stroke-width="6"/>
+                  <circle cx="27" cy="27" r="23" fill="none" stroke="var(--budget-safe)" stroke-width="6"
+                          stroke-linecap="round" stroke-dasharray="92.5 144.5"
+                          transform="rotate(-90 27 27)"/>
+                  <text x="27" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="var(--on-bg)">64%</text>
+                </svg>
+                <div>
+                  <div class="ps-goal-name">Acil durum fonu</div>
+                  <div class="ps-sub numeric">₺48.000 / ₺75.000</div>
+                  <div class="ps-sub">Aralık için yolunda</div>
+                </div>
+              </div>
+              <div class="ps-mini"><span class="n">Lizbon gezisi</span><span class="v numeric">₺16.000 / ₺37.500</span></div>
+              <div class="ps-mini"><span class="n">Fotoğraf makinesi</span><span class="v numeric">₺5.250 / ₺22.500</span></div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-row">
+                <span class="ps-sym">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>
+                </span>
+                <div>
+                  <div class="ps-label">Abonelikler</div>
+                  <div class="ps-sub" style="margin-top:2px">Bu döngüde aboneliklerden <b class="numeric ps-strong">₺369,97</b> daha gelecek</div>
+                  <div class="ps-sub ps-up">Spotify: Eylül itibarıyla ₺79,99 tutarından yükseldi</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ps-card">
+              <div class="ps-label">Bütçeler</div>
+              <div class="ps-mini"><span class="n">Market</span><span class="v numeric">₺9.650 / ₺11.250</span></div>
+              <div class="ps-bar warn"><i style="width:86%"></i></div>
+              <div class="ps-mini"><span class="n">Dışarıda yemek</span><span class="v numeric">₺2.375 / ₺5.250</span></div>
+              <div class="ps-bar"><i style="width:45%"></i></div>
+            </div>
+          </div>
+
+          <div class="ps-tabs">
+            <div class="ps-tab active">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 4 9.6V20a1 1 0 0 0 1 1h5v-6h4v6h5a1 1 0 0 0 1-1V9.6Z"/></svg>
+              Ana sayfa
+            </div>
+            <div class="ps-tab">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm10 7h4V8h-4Z"/></svg>
+              Bütçeler
+            </div>
+            <div class="ps-fab">+</div>
+            <div class="ps-tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/></svg>
+              Hedefler
+            </div>
+            <div class="ps-tab">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20V10h3v10Zm5.5 0V4h3v16ZM16 20v-7h3v7Z"/></svg>
+              Analiz
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"/></svg>
+      Cihazında şifreli
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.8 22.6 1.4 4.2 2.8 2.8l18.4 18.4ZM7.7 5.2 6.1 3.6A9.9 9.9 0 0 1 12 2a10 10 0 0 1 10 10 9.9 9.9 0 0 1-1.6 5.9l-1.5-1.6A8 8 0 0 0 12 4a8 8 0 0 0-4.3 1.2ZM12 22A10 10 0 0 1 2 12a9.9 9.9 0 0 1 1.3-4.9l1.5 1.5A8 8 0 0 0 12 20a8 8 0 0 0 3.4-.8l1.5 1.5A9.9 9.9 0 0 1 12 22Z"/></svg>
+      Hesap yok, sunucu yok
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4Zm0 4h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm3 5h4v2H7Z"/><path d="m21.5 1 1.4 1.4L2.4 23 1 21.6Z"/></svg>
+      Banka bağlantısı yok
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5Zm-1.5 15-3.7-3.7 1.4-1.4 2.3 2.3 5.3-5.3 1.4 1.4Z"/></svg>
+      Tamamen çevrimdışı çalışır
+    </div>
+  </div>
+</div>
+
+<section class="commitments" id="subscriptions">
+  <div class="container">
+    <p class="eyebrow">Abonelikler ve taksitler</p>
+    <h2>Ayın ne kadarının şimdiden ayrıldığını bil.</h2>
+    <p class="section-lede">Drachma aboneliklerini ve taksit planlarını, zaten içe aktardığın ekstrelerde kendisi bulur. Banka girişi yok. Her ayın ne kadarının şimdiden ayrıldığını gör, fiyat artışlarını yakala ve iptal ettiğin bir şey yeniden çekim yaparsa haberin olsun.</p>
+
+    <div class="commit-grid">
+      <article class="commit-card">
+        <div class="commit-head">
+          <span class="f-icon terracotta">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>
+          </span>
+          <div>
+            <h3>Abonelikler</h3>
+            <p>Senin için bulunur, sonra takip edilir.</p>
+          </div>
+        </div>
+
+        <div class="mini" aria-hidden="true">
+          <div class="mini-top">
+            <span class="mini-label ico sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>Abonelikler</span>
+            <span class="mini-sub numeric">yılda ₺4.439,64</span>
+          </div>
+          <div class="mini-total numeric">₺369,97 <small>ayda</small></div>
+          <div class="share-bar"><i class="r1" style="width:62%"></i><i class="r2" style="width:27%"></i><i class="r3" style="width:11%"></i></div>
+          <div class="mini-row">
+            <span class="av r1">N</span>
+            <span class="nm">Netflix<span class="meta">3 gün içinde yenileniyor</span></span>
+            <span class="amt numeric">₺229,99</span>
+          </div>
+          <div class="mini-row">
+            <span class="av r2">S</span>
+            <span class="nm">Spotify<span class="meta up">Eylül itibarıyla ₺79,99 tutarından yükseldi</span></span>
+            <span class="amt numeric">₺99,99</span>
+          </div>
+          <div class="mini-row">
+            <span class="av r3">i</span>
+            <span class="nm">iCloud+<span class="meta">18 Eki'de yenileniyor</span></span>
+            <span class="amt numeric">₺39,99</span>
+          </div>
+          <div class="mini-row">
+            <span class="av">F</span>
+            <span class="nm">Fitness uygulaması<span class="meta alert">İptal edildi · yeniden çekim olursa haber verilir</span></span>
+            <span class="amt numeric"><s>₺149,99</s></span>
+          </div>
+        </div>
+
+        <ul class="ticks">
+          <li><b>Kendiliğinden bulunur.</b> Drachma geçmişinde ve her yeni ekstrede tekrar edenleri fark eder; Netflix, Spotify, Apple, Google ve daha fazlasını adıyla tanır.</li>
+          <li><b>Fiyat artışları işaretlenir.</b> Bir aboneliğin sessizce pahalandığını hemen gör.</li>
+          <li><b>Tahmin etmez, sorar.</b> Bir ekstre yenilemeyi tek seferlik bir satın almadan ayıramadığında Drachma sana bir kez sorar.</li>
+          <li><b>"İptal ettim."</b> İptal olarak işaretle; bir gün yeniden çekim yaparsa Drachma sana haber verir.</li>
+          <li><b>Yenileme hatırlatmaları</b><span class="plus-tag">Plus</span> Bir şey yenilenmeden önce hatırlatma gelir, böylece zamanında iptal edebilirsin.</li>
+        </ul>
+        <p class="plan-foot">Free 3 aboneliği takip eder. Plus hepsini takip eder.</p>
+      </article>
+
+      <article class="commit-card">
+        <div class="commit-head">
+          <span class="f-icon sage">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2M8 17h2"/></svg>
+          </span>
+          <div>
+            <h3>Taksitler</h3>
+            <p>Taksit dilinden anlar.</p>
+          </div>
+        </div>
+
+        <div class="mini" aria-hidden="true">
+          <div class="mini-top">
+            <span class="mini-label ico inst"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Taksitler</span>
+            <span class="mini-sub numeric">Ocak ayında ₺850 serbest kalıyor</span>
+          </div>
+          <div class="mini-total numeric">₺2.550 <small>her ay ayrılmış</small></div>
+          <div class="mini-row">
+            <span class="av">D</span>
+            <span class="nm">Dizüstü bilgisayar<span class="meta numeric">₺6.600 ödendi · ₺6.600 kaldı · Nis 2027'de bitiyor</span></span>
+            <span class="amt numeric">₺1.100</span>
+          </div>
+          <div class="mini-row">
+            <span class="av">Ç</span>
+            <span class="nm">Çamaşır makinesi<span class="meta numeric">₺3.400 ödendi · ₺1.700 kaldı · Ara 2026'da bitiyor</span></span>
+            <span class="amt numeric">₺850</span>
+          </div>
+          <div class="mini-row">
+            <span class="av">T</span>
+            <span class="nm">Telefon<span class="meta numeric">₺1.800 ödendi · ₺5.400 kaldı · Tem 2027'de bitiyor</span></span>
+            <span class="amt numeric">₺600</span>
+          </div>
+          <div class="mini-free">Taksit gibi mi? <span class="numeric">MEDIAMARKT 2/4 · ₺625</span><span class="yn"><span>Evet</span><span>Hayır</span></span></div>
+        </div>
+
+        <ul class="ticks">
+          <li><b>Planları kendisi bulur.</b> Drachma kart ekstrelerindeki taksit planlarını fark eder ve her planın ödemelerini bir arada tutar.</li>
+          <li><b>Ödenen, kalan ve bitiş.</b> Her planda ne ödendiğini ve ne kaldığını, her ayın ne kadarının şimdiden ayrıldığını ve paranın ne zaman serbest kalacağını gör.</li>
+          <li><b>Emin değilse sorar.</b> Bir şey yalnızca taksite benziyorsa Drachma önce sana danışır.</li>
+          <li><b>Kendi planların da.</b> İstediğin zaman elle plan ekle.</li>
+        </ul>
+        <p class="plan-foot">Herkes için ücretsiz.</p>
+      </article>
+    </div>
+
+    <div class="ahead">
+      <div class="ahead-copy">
+        <h3>Önündeki ayları gör <span class="plus-tag">Plus</span></h3>
+        <p>Önümüzdeki altı ayda şimdiden ayrılan tutar, her planın bittiği ay ve aboneliklerinin bir yılda gerçekte ne tuttuğu.</p>
+      </div>
+      <div class="mini ahead-chart" aria-hidden="true">
+        <div class="mini-top">
+          <span class="mini-label">Şimdiden ayrılanlar</span>
+          <span class="mini-sub">Sonraki 6 ay</span>
+        </div>
+        <div class="chart">
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:58px"></i><span>Eki</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:58px"></i><span>Kas</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:58px"></i><span>Ara</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:33px"></i><b>serbest</b><span>Oca</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:33px"></i><span>Şub</span></div>
+          <div class="col"><i class="sub" style="height:26px"></i><i class="inst" style="height:33px"></i><span>Mar</span></div>
+        </div>
+        <div class="legend"><span class="sub"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>Abonelikler</span><span class="inst"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Taksitler</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <p class="eyebrow">Neler yapar</p>
+    <h2>Parasının hesabını kendine saklamak isteyenler için</h2>
+    <p class="section-lede">Akış yok, reklam yok, banka girişi yok. Paranın nereye gittiğini bilmenin en hızlı ve dürüst yolu; kazançları en az kayıplar kadar coşkuyla kutlayan bir koç.</p>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="f-icon terracotta">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 21v-6.6H6.5L13 3v6.6h4.5Z"/></svg>
+        </div>
+        <h3>Yaklaşık üç saniyede kaydet</h3>
+        <p>Kas hafızana yerleşene kadar ayarlanmış, tuş takımıyla başlayan bir akış: sık gittiğin yerler için hızlı ekleme kutucukları, her şeyi önceden dolduran "yine al" düğmeleri, yazımlarını öğrenen isim önerileri ve her günkü kahveni tek dokunuşla kaydeden bir alışkanlık önerisi.</p>
+        <p class="f-quote">Tutar, kategori, bitti.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon sage">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a1 1 0 0 1 1 1v3a2.5 2.5 0 0 0 0 5v3h-.001L21 19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a2.5 2.5 0 0 0 0-5V5a1 1 0 0 1 1-1Zm5 4v8h2V8Zm4 0v8h2V8Z"/></svg>
+        </div>
+        <h3>Tamponlu zarflar</h3>
+        <p>Aylık planını zarflara böl, kalanı esnek bir tampon olarak tut. Bir zarf taştı mı? Tek dokunuşla tampondan karşıla. Kehribar yaklaşıyor, kiremit aştı demek; alarm kırmızısı asla yok. Bütçe geçmişi son altı ayını gösterir.</p>
+        <p class="f-quote">Azarlayan değil, yol gösteren.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon honey">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+        </div>
+        <h3>Gerçeği söyleyen hedefler</h3>
+        <p>Halkalar, kilometre taşları ve dürüst bir tahmini bitiş tarihi; geride kalmak bal rengiyle gösterilir, asla kırmızıyla değil. Hedeflerini dört yoldan besle: istediğin an ek para, aylık ayırmalar, ay sonu tampon süpürmeleri ve bozukluklar. Her hedef, parasının nereden geldiğini gösterir.</p>
+        <p class="f-quote">%25, %50, %75 ve %100'de konfeti. 🎉</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon terracotta">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h4v2H5v2H3Zm14 0h4v4h-2V5h-2ZM3 17h2v2h2v2H3Zm16 0h2v4h-4v-2h2ZM7 7h10v3H7Zm0 4.5h10v2H7Zm0 3.5h7v2H7Z"/></svg>
+        </div>
+        <h3>Fiş tara, ekstre aktar</h3>
+        <p>Kamerayı bir fişe tut, her satırı al; okuma tamamen telefonunda yapılır. Banka ekstrelerini PDF, CSV ya da Excel olarak ekle: Drachma aynı kayıtları eşleştirir, böylece hiçbir şey iki kez sayılmaz, okurken de aboneliklerini ve taksitlerini ayıklar.</p>
+        <p class="f-quote">Fişlerin telefonundan hiç çıkmaz.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon sage">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 3.05A9 9 0 1 0 20.95 13H11ZM13 2v9h9a9 9 0 0 0-9-9Z"/></svg>
+        </div>
+        <h3>Ürün ürün analiz</h3>
+        <p>Sadece "Market: epey." değil. Her kategorinin nereye gittiğini, ayın nereye gittiğini ve geçen seferden bu yana ne değiştiğini gör; aboneliklerin ve taksitlerin de bir bakışta önünde. Plus; altı aylık eğilimleri, aylık sağlık kontrolünü, sepetlerinin içine ürün ürün bir bakışı ve önündeki ayları ekler.</p>
+        <p class="f-quote">Ürün düzeyinde gerçek, sıfır yargı.</p>
+      </div>
+
+      <div class="feature">
+        <div class="f-icon honey">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c-4.4 0-8-3.6-8-8 0-3.5 2.2-5.6 4-7.5C9.6 4.8 11 3.3 11 1c0 0 7 3.5 7 10a4.9 4.9 0 0 1-.1 1c.7-.5 1.4-1.2 1.8-2.2 0 0 1.3 2.6 1.3 5.2A7 7 0 0 1 12 22Z"/></svg>
+        </div>
+        <h3>İvme var, utanç yok</h3>
+        <p>Hep senin tarafında olan seriler, XP ve başarılar. Bir gün kaçırırsan serin sıfırlanmaz, iyileşir. Rozetler yaptıklarını kutlar. Yapmadıkların için hiçbir şey başının etini yemez.</p>
+        <p class="f-quote">Kazançlar, kayıplardan daha yüksek sesle kutlanır.</p>
+      </div>
+    </div>
+
+    <div class="chips">
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5Z"/></svg> Sana ait şifreli yedekler</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5Zm7-18L5.5 9H10v6h4V9h4.5Z" transform="rotate(180 12 11)"/></svg> CSV ve JSON dışa aktarma</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z" transform="rotate(180 12 12)"/></svg> 40 para birimi</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9M12 3c-2.5 2.6-3.8 5.6-3.8 9s1.3 6.4 3.8 9"/></svg> 8 dil</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8l10 10-8 8L3 11Zm4.5 6A1.5 1.5 0 1 0 6 7.5 1.5 1.5 0 0 0 7.5 9Z"/></svg> Ürün etiketleri</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Zm0 16V5a7 7 0 0 1 0 14Z"/></svg> Açık, Koyu ve OLED temalar</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 4h6v2H9Zm3 4a7 7 0 1 0 7 7 7 7 0 0 0-7-7Zm1 7h-2v-4h2Z"/></svg> Nazik hatırlatmalar ve haftalık özet</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l4 4 4-4H6a7 7 0 1 1 7 7 7 7 0 0 1-5-2.1L6.6 18.3A9 9 0 1 0 13 3Z"/></svg> Tekrarlayan kayıtlar</span>
+      <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5Zm0 12A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 16.5Z"/></svg> Azaltılmış hareket desteği</span>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="plus">
+  <div class="container">
+    <p class="eyebrow">Free ve Plus</p>
+    <h2>Free günlük bütçeyi karşılar. Plus sınırları kaldırır.</h2>
+    <p class="section-lede">Reklam yok, deneme süresi sayacı yok. Elle kayıt her planda, her zaman sınırsız. Plus; çok fiş tarayan ve ekstre aktaranlar, çok sayıda zarf ve hedef yönetenler ya da her aboneliğini takip etmek isteyenler için.</p>
+
+    <div class="plan-grid">
+      <div class="plan">
+        <div>
+          <div class="plan-name">Free</div>
+          <p class="plan-price">Süre sınırı yok, reklam yok.</p>
+        </div>
+        <ul class="ticks">
+          <li><b>Sınırsız elle kayıt</b>, her zaman</li>
+          <li><b>Toplam 30 fiş taraması ve 5 ekstre aktarımı</b>, başlangıç için</li>
+          <li><b>En fazla 5 zarf ve aynı anda 2 hedef</b>; biten bir hedef yerini boşaltır</li>
+          <li><b>Taksitler</b>, eksiksiz bulunur ve takip edilir</li>
+          <li><b>3 abonelik takibi</b>, fiyat artışı işaretleri ve "yeniden çekim" uyarısıyla</li>
+          <li><b>Analiz</b>: paranın nereye gittiği, ayın nasıl gittiği, aboneliklerin ve taksitlerin bir bakışta</li>
+          <li><b>Şifreli yedekler, CSV ve JSON dışa aktarma</b>, tüm temalar ve günlük hatırlatmalar</li>
+        </ul>
+        <p class="plan-foot">Verilerin asla rehin tutulmaz: yedekleme ve dışa aktarma ücretsiz kalır.</p>
+      </div>
+
+      <div class="plan plan-plus">
+        <div>
+          <div class="plan-name">Drachma Plus</div>
+          <p class="plan-price">Fiyat, onaylamadan önce uygulamada, mağazanın para biriminde gösterilir.</p>
+        </div>
+        <ul class="ticks">
+          <li><b>Free'deki her şey</b></li>
+          <li><b>Sınırsız fiş taraması ve ekstre aktarımı</b></li>
+          <li><b>Sınırsız zarf, hedef ve abonelik</b></li>
+          <li><b>Derin okumalar</b>: altı aylık eğilimler, aylık sağlık kontrolü ve sepetlerinin içine ürün ürün bir bakış</li>
+          <li><b>Şimdiden ayrılanlar</b>: önümüzdeki altı ayda şimdiden ayrılan tutar</li>
+          <li><b>Bir yılın maliyeti</b>: aboneliklerin yıllık fiyatına göre sıralı</li>
+          <li><b>Yenileme hatırlatmaları</b>, her abonelik yenilenmeden önce</li>
+        </ul>
+        <p class="plan-foot">Ücretsiz başla. İstediğin zaman Ayarlar → Drachma Plus'tan yükselt.</p>
+      </div>
+    </div>
+
+    <p class="plan-note">Plus, Google Play ya da App Store üzerinden faturalandırılır ve mağazanın abonelik ayarlarından iptal edene kadar yenilenir. Ödediğin dönemin sonuna kadar açık kalır; yeni bir telefonda "Satın alımı geri yükle" onu geri getirir. Bir Free sınırına ulaşmak, zaten sahip olduklarını asla kilitlemez. Plus kontrol edilemezse, örneğin çevrimdışıysan, Drachma Free'ye döner. Ödeme yapmak gizlilik anlaşmasını değiştirmez: bütçe verilerin telefonundan asla çıkmaz, Plus dahil.</p>
+  </div>
+</section>
+
+<section class="privacy-band" id="privacy">
+  <div class="container">
+    <div>
+      <p class="eyebrow">Drachma nasıl çalışır</p>
+      <h2>Önce çevrimdışı, önce gizlilik.</h2>
+      <p class="big-quote">“Para verilerin bu telefondan asla çıkmaz. Gönderilecek bir sunucu yok. Tasarımın tamamı bu.”</p>
+      <p>Drachma'yı açtığında sana söylediği ilk şey bu ve kod bu sözü tutar. Kayıt olma yok, banka bağlantısı yok, eşitleme hizmeti yok, harcamalarının durduğu bir şirket veritabanı da yok.</p>
+      <p class="privacy-links">Sade bir dille yazılmış <a href="privacy.html">gizlilik politikasını</a> ve <a href="terms.html">kullanım koşullarını</a> oku. Her biri yaklaşık bir sayfa.</p>
+    </div>
+    <ul class="privacy-list">
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"/></svg>
+        <div><b>Cihazında şifreli</b><p>Her harcama, bütçe ve hedef, telefonundaki şifreli bir veritabanında durur; anahtarı cihazının güvenli donanımında saklanır.</p></div>
+      </li>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5Z" opacity=".4"/><path d="m21.5 1 1.4 1.4L2.4 23 1 21.6Z"/></svg>
+        <div><b>Hesap yok, banka bağlantısı yok</b><p>Kayıt olacak, eşitlenecek, sızacak bir şey yok. Abonelikler ve taksitler içe aktardığın ekstrelerden gelir ve telefonunda okunur. Yedekler senin sakladığın, yalnızca senin bildiğin bir parolayla mühürlenmiş dosyalardır.</p></div>
+      </li>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14a1 1 0 0 0 1-1v-6h-2v5H6V6h5V4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1Zm8-16v2h3.6l-7.3 7.3 1.4 1.4L18 7.4V11h2V4Z"/></svg>
+        <div><b>Saklamak da silmek de senin elinde</b><p>Her şeyi istediğin zaman CSV ya da JSON olarak dışa aktar ya da uygulamayı kaldır, hepsi gider. Geride hiçbir kopya kalmaz.</p></div>
+      </li>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 5v6.1c0 4.8 3.4 9.3 8 10.9 4.6-1.6 8-6.1 8-10.9V5Zm-1 13-3-3 1.4-1.4L11 12.2l3.6-3.6L16 10Z"/></svg>
+        <div><b>Tanılama konusunda dürüst</b><p>Anonim çökme raporları ve kullanım istatistikleri hataları düzeltmeye yardımcı olur. Asla tutarlar, mağazalar ya da kategoriler değil; ikisini de Ayarlar'dan kapatabilirsin.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="eyebrow">Sorular</p>
+    <h2>Yerinde sorular, açık cevaplar</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Drachma neden bankama bağlanmıyor?</summary>
+        <p>Bilerek. Banka eşitlemesi, bir şirketin giriş bilgilerini, bir sunucunun da işlemlerini tutması demek. Drachma bu takastan canı yananlar için yapıldı: elle kayıt yaklaşık üç saniye sürer ve onu yazmak, harcamayı fark etmeni sağlar.</p>
+        <p>Biriken kayıtların varsa hepsini yazman gerekmez: banka ekstreni içe aktar, Drachma onu telefonunda okusun ve okurken abonelikleri ve taksit planlarını ayıklasın.</p>
+      </details>
+      <details>
+        <summary>Drachma bankama bağlanmadan aboneliklerimi nasıl buluyor?</summary>
+        <p>Zaten içe aktardığın ekstrelerden ve fişlerden, bir de yazdıklarından. Drachma tekrar eden çekimleri fark eder ve Netflix, Spotify, Apple, Google gibi popüler hizmetleri adıyla tanır. Hepsi telefonunda olur.</p>
+      </details>
+      <details>
+        <summary>Taksitlerden anlıyor mu?</summary>
+        <p>Evet. Drachma kredi kartı ekstrelerindeki taksit planlarını tanır, her planın ödemelerini bir arada tutar ve ne ödendiğini, ne kaldığını, ne zaman biteceğini gösterir. Emin değilse önce sana sorar. Planı elle de ekleyebilirsin. Taksitler ücretsizdir.</p>
+      </details>
+      <details>
+        <summary>Telefon değiştirince ne olur?</summary>
+        <p>Ayarlar'dan bir yedek oluştur: AES-256 şifrelemesi ve senin seçtiğin bir parolayla mühürlenmiş tek bir <b>.drachma</b> dosyası. Onu istediğin gibi taşı (kablo, sürücü, kendi bulutun), yeni telefona Drachma'yı kur ve geri yükle. Hiçbir şey bizden geçmez, çünkü bizim tarafımızda bir sunucu yok.</p>
+      </details>
+      <details>
+        <summary>Telefonumdan bir şey çıkıyor mu?</summary>
+        <p>Para verilerin çıkmaz: onlar için ne bir hesap ne de bir sunucu var. Ayarlar'dan kapatmadığın sürece iki isteğe bağlı tanılama çıkar: çökme raporları ve "tuş takımıyla kayıt eklendi" gibi sabit bir olay listesiyle sınırlı anonim kullanım istatistikleri. Asla tutarlar, mağazalar, kategoriler ya da isimler değil. Plus satın alırsan uygulama mağazan ve Drachma'nın kullandığı abonelik hizmeti Adapty bunu doğrular; yine de bütçeni asla görmezler. <a href="privacy.html">Gizlilik politikası</a> her olayı listeler.</p>
+      </details>
+      <details>
+        <summary>Ücreti ne kadar?</summary>
+        <p>Drachma ücretsizdir; reklam yok, süre sınırı yok. Elle kayıt her planda sınırsız. Free; başlangıç için toplam 30 fiş taraması ve 5 ekstre aktarımı, en fazla 5 zarf, aynı anda 2 hedef ve 3 abonelik takibi içerir.</p>
+        <p>Drachma Plus, bu sınırları kaldıran ve daha derin analizler, önündeki ayların görünümü ve yenileme hatırlatmaları ekleyen isteğe bağlı bir aboneliktir. Uygulama mağazan üzerinden faturalandırılır ve fiyat, onaylamadan önce uygulamada gösterilir. <a href="#plus">Free ile Plus'ı karşılaştır</a>.</p>
+      </details>
+      <details>
+        <summary>Hangi platformlar, diller ve para birimleri?</summary>
+        <p>Android ve iOS. Drachma Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce ve Rusça konuşur. 40 para birimini doğru sembol ve biçimleriyle destekler, haftanın ve ayın ne zaman başlayacağını seçmene izin verir ve Açık, Koyu ve tam siyah OLED temalarla gelir.</p>
+      </details>
+      <details>
+        <summary>Telefonum kaybolursa verilerim güvende mi?</summary>
+        <p>Veritabanı, cihazının güvenli donanımında saklanan bir anahtarla şifrelenir; yani telefonunun kilidiyle korunur. Yedekler kendi parolanla mühürlenir; o olmadan açılamazlar. Hatırlayacağın bir parola seç: sıfırlama yok, çünkü anahtar senden başka kimsede değil.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="get">
+  <div class="container">
+    <div class="cta-card">
+      <h2>Para hikâyene bu akşam başla.</h2>
+      <p>İki mağazada da ücretsiz, daha fazla alan istersen Plus da var. İlk kaydına üç saniye; sonrası yalnızca seninle telefonun arasında kalır.</p>
+      <div class="store-badges">
+        <a href="https://play.google.com/store/apps/details?id=com.mkhakpaki.drachma.android" aria-label="Google Play'den alın">
+          <img src="../assets/google-play-badge.png" alt="Google Play'den alın">
+        </a>
+        <a href="https://apps.apple.com/app/id6801626534" aria-label="App Store'dan indirin">
+          <img src="../assets/app-store-badge.svg" alt="App Store'dan indirin">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="./">
+        <img src="../assets/favicon.svg" alt="" width="26" height="26">
+        Drachma
+      </a>
+      <nav>
+        <a href="support.html">Destek</a>
+        <a href="privacy.html">Gizlilik politikası</a>
+        <a href="terms.html">Kullanım koşulları</a>
+        <a href="mailto:hi@trydrachma.com">İletişim</a>
+        <a href="../?lang=en" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Tasarımı gereği çevrimdışı. Para hikâyen hep senin kalır.</p>
+      <p>© 2026 Mohammad Khakpaki. Google Play ve Google Play logosu, Google LLC'nin ticari markalarıdır. Apple, Apple logosu ve App Store, Apple Inc.'in ticari markalarıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var order = ["light", "dark", "oled"];
+    var icons = { light: "◐", dark: "◑", oled: "●" };
+    var btn = document.getElementById("themeToggle");
+    function current() { return document.documentElement.getAttribute("data-theme") || "light"; }
+    function apply(t) {
+      if (t === "light") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", t);
+      btn.textContent = icons[t];
+      btn.title = "Tema: " + ({ light: "Açık", dark: "Koyu", oled: "OLED" })[t];
+      try { localStorage.setItem("drachma-theme", t); } catch (e) {}
+    }
+    btn.textContent = icons[current()];
+    btn.addEventListener("click", function () {
+      apply(order[(order.indexOf(current()) + 1) % order.length]);
+    });
+  })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
+</script>
+
+</body>
+</html>

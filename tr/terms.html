@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kullanım koşulları · Drachma</title>
+  <meta name="description" content="Drachma'nın sade dille yazılmış kullanım koşulları: söz verdiğimiz gibi yaklaşık bir sayfa.">
+  <link rel="canonical" href="https://trydrachma.com/tr/terms">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/terms">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/terms">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/terms">
+  <meta name="theme-color" content="#FBF7F0">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) {}
+      if (!l) l = saved;
+      var had = p.has("lang"); p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "en") location.replace("../terms.html" + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+      if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+      if (t && t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">
+      <img src="../assets/favicon.svg" alt="" width="30" height="30">
+      Drachma
+    </a>
+    <nav class="site-nav">
+      <a href="./#subscriptions">Abonelikler</a>
+      <a class="nav-wide" href="./#features">Özellikler</a>
+      <a href="./#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Gizlilik</a>
+      <a href="./#faq">SSS</a>
+      <a class="nav-wide" href="support.html">Destek</a>
+      <a class="lang-toggle" href="../terms.html?lang=en" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
+      <button class="theme-toggle" id="themeToggle" title="Tema: Açık / Koyu / OLED" aria-label="Temayı değiştir">◐</button>
+      <a class="btn" href="../get/">İndir</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+  <header>
+    <p class="eyebrow">Yasal</p>
+    <h1>Kullanım koşulları</h1>
+    <p class="meta">Sürüm 2026-10 · Son güncelleme: 2 Ekim 2026 · Drachma uygulaması (Android ve iOS) ve bu web sitesi için geçerlidir.</p>
+  </header>
+  <p class="meta">Bu metin, İngilizce sürümün Türkçe çevirisidir. İki metin arasında bir fark olursa İngilizce sürüm esas alınır.</p>
+
+  <div class="callout">
+    <p><b>Kısaca.</b> Drachma kişisel bir bütçeleme aracıdır. Verilerin senindir ve onların yedeğini almak senin elinde. Drachma sana kendi rakamların üzerinden dürüst bir matematik gösterir. Finansal tavsiye değildir. Uygulamayı kişisel amaçla ve adil biçimde kullan, aramız iyi olur.</p>
+  </div>
+
+  <h2>1. Bu koşulları kabul etmek</h2>
+  <p>Drachma'yı yükleyerek ya da kullanarak bu koşulları ve <a href="privacy.html">gizlilik politikasını</a> kabul etmiş olursun. Uygulama bu onayı kurulum sırasında açıkça ister. Kabul etmiyorsan uygulamayı kullanma. Kırgınlık yok.</p>
+
+  <h2>2. Kimle muhatap olduğun</h2>
+  <p>Drachma'yı bağımsız bir geliştirici olan Mohammad Khakpaki geliştirir ve yayımlar. İletişim: <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a>.</p>
+
+  <h2>3. Drachma'yı kullanma lisansın</h2>
+  <p>Sahip olduğun ya da kontrol ettiğin cihazlarda, kendi bütçelemen için Drachma'yı yüklemek ve kullanmak üzere kişisel, münhasır olmayan, devredilemez bir lisans alırsın. Uygulamayı yeniden satma, parçalarını söküp yeniden dağıtma ya da rakip bir veri kümesi veya hizmet oluşturmak için kullanma. Kendi verilerini istediğin yere dışa aktarmak dahil, normal kişisel kullanım tam olarak uygulamanın amacıdır.</p>
+
+  <h2>4. Verilerin senindir</h2>
+  <p>Drachma'ya girdiğin her şey sana aittir. Uygulama bunu cihazında şifrelenmiş olarak saklar ve istediğinde sana eksiksiz dışa aktarmalar (CSV/JSON) ve şifreli yedekler sunar. Sunucuda bir kopya olmadığı için <b>verilerini güvende tutabilecek tek kişi sensin</b>:</p>
+  <ul>
+    <li>telefon değiştirmeden ya da telefonu sıfırlamadan önce yedek al, çünkü uygulamayı kaldırmak yerel veritabanını kalıcı olarak yok eder;</li>
+    <li>yedek parolanı unutma, çünkü şifreli yedekler o parola olmadan kimse tarafından açılamaz ya da sıfırlanamaz;</li>
+    <li>düz CSV/JSON dışa aktarmalarına, gerçekte oldukları gibi, özel belgeler olarak davran.</li>
+  </ul>
+
+  <h2>5. Finansal tavsiye değildir</h2>
+  <p>Drachma, senin verdiğin sayılar üzerinde aritmetik yapar: bütçeler, tempolar, projeksiyonlar ve analizler hesaplamadır, öneri değildir. Finansal danışman, muhasebeci ya da vergi aracı değildir; projeksiyonları dürüst tahminlerdir, vaat değildir. Paranla ilgili kararlar sana kalır.</p>
+  <p>Aynısı Drachma'nın kayıtlarında bulduğu şeyler için de geçerli. Tespit edilen abonelikler, taksit planları, yenileme tarihleri, fiyat değişiklikleri ve hatırlatmalar, senin kendi ekstrelerinin ve fişlerinin en iyi çaba esasıyla yapılmış okumalarıdır; eksik ya da hatalı olabilirler. Bunlara güvenmeden önce, örneğin bir iptal son tarihinden önce, hizmet sağlayıcıya ya da bankana danış.</p>
+
+  <h2>6. Adil kullanım</h2>
+  <p>Drachma'yı yasaları çiğnemek için kullanma, uygulamanın hizmetlerini (duyuru kanalı gibi) aksatmaya çalışma ve Drachma'yı kendi eserinmiş gibi gösterme. Listenin tamamı bu.</p>
+
+  <h2>7. Üçüncü taraf hizmetler</h2>
+  <p>Drachma; isteğe bağlı çökme raporları, anonim kullanım istatistikleri, toplu duyurular ve uzaktan yapılandırma için Google Firebase'i (ayrıntılar ve anahtarlar <a href="privacy.html">gizlilik politikasında</a>), Drachma Plus abonelik durumunu kontrol etmek için Adapty'yi ve telefonunun kendi cihaz üstü belge tarayıcısını kullanır. Uygulama mağazan (Google Play ya da App Store) dağıtımı, puanlama istemini ve tüm satın alımları kendi şartları kapsamında yürütür.</p>
+
+  <h2>8. Fiyat ve Drachma Plus</h2>
+  <p>Drachma'nın çekirdeği ücretsizdir: paranı kaydetmek, bütçeler, hedefler, taksit planları, abonelik tespiti, analiz temelleri ve veri araçların (dışa aktarma ve yedekleme) ücretsiz kalır. Free plan, uygulamada gösterilen kotaları içerir: şu anda kurulum başına 30 fiş taraması ve 5 ekstre aktarımı, en fazla 5 zarf, 2 aktif hedef ve 3 takip edilen abonelik. Ücretli bir abonelik olan <b>Drachma Plus</b> bu sınırları kaldırır ve daha derin analizleri (Eğilimler, Sağlık kontrolü, Sepetlerinin içinde, Şimdiden ayrılanlar, Bir yılın maliyeti) ve abonelik yenileme hatırlatmalarını ekler. Elle girişe hiçbir planda sınır getirilmez.</p>
+  <p>Free plan kotaları zamanla değişebilir. Bir kotaya ulaşmak yalnızca daha fazla ekleme yapmanı sınırlar; mevcut verilerini asla kilitlemez.</p>
+  <p>Plus, uygulama mağazan üzerinden otomatik yenilenen bir abonelik olarak faturalandırılır: fiyat ve faturalandırma dönemi sen onaylamadan önce uygulamada gösterilir, abonelik sen iptal edene kadar yenilenir ve istediğin zaman mağazanın abonelik ayarlarından iptal edebilirsin. İptal etmek, ödediğin dönemin sonuna kadar Plus'ı korur. Yeni bir cihazda Ayarlar'daki "Satın alımı geri yükle" etkin bir aboneliği geri getirir. Uygulama bir aboneliği bir süreliğine doğrulayamazsa (çevrimdışısın, mağazada bir aksaklık var), seni kendi rakamlarına erişimden kilitlemek yerine Free plana döner.</p>
+  <p>Gizlilik sözü ödemeyle değişmez: bütçe verilerin, Plus dahil, cihazından asla çıkmaz. Abonelik durumunun nasıl kontrol edildiği <a href="privacy.html">gizlilik politikasında</a> anlatılıyor.</p>
+
+  <h2>9. Güncellemeler ve zorunlu sürümler</h2>
+  <p>Drachma ara sıra devam etmeden önce bir güncelleme isteyebilir; örneğin eski bir sürümde ciddi bir hata ya da veri biçimi değişikliği olduğunda. Uygulama bunu sana açıkça söyler ve seni mağazana yönlendirir. Bu koşullar, uygulamanın güncellenmiş hâlini kapsar.</p>
+
+  <h2>10. Fikri mülkiyet</h2>
+  <p>Uygulamanın, tasarım sisteminin, görsel çalışmalarının ve adının telif hakkı © Mohammad Khakpaki'ye aittir. Senin verilerin ise kesinlikle benim değil (bkz. 4. bölüm).</p>
+
+  <h2>11. Garanti verilmemesi</h2>
+  <p>Drachma, belirli bir amaca uygunluk ve üçüncü kişilerin haklarını ihlal etmeme dahil, açık ya da zımni hiçbir tür garanti olmaksızın <b>"olduğu gibi"</b> ve <b>"mevcut olduğu şekliyle"</b> sunulur. Güvenilir olması için çok çalışıyorum ve uygulama seni yedek almaya teşvik ediyor, ama hiçbir yazılım kusursuz değildir.</p>
+
+  <h2>12. Sorumluluğun sınırlandırılması</h2>
+  <p>Yasaların izin verdiği ölçüde; dolaylı, arızi ya da sonuç olarak ortaya çıkan zararlardan veya yedeğini almadığın kayıp verilerden sorumlu değilim. Toplam sorumluluk, son 12 ayda Drachma için ödediğin tutarla sınırlıdır. Bu koşulların hiçbir hükmü, yasal olarak hariç tutulamayacak bir sorumluluğu hariç tutmaz ve ülkendeki emredici tüketici koruma hakların sende kalır.</p>
+
+  <h2>13. Sona erme</h2>
+  <p>İstediğin zaman bırakabilirsin: istersen verilerini dışa aktar, sonra uygulamayı kaldır. Uygulamayı ya da toplu duyuru hizmetlerini sunmayı bırakabilirim; Drachma önce çevrimdışı çalışacak şekilde tasarlandığı için, yüklü bir uygulama temel işlevi açısından yine de çalışmaya devam eder.</p>
+
+  <h2>14. Bu koşullardaki değişiklikler</h2>
+  <p>Bu koşullar esaslı biçimde değişirse, uygulama kabul ettiğin sürümü takip eder ve güncellemeyi okuyup kabul edene kadar Ayarlar'da bir inceleme bildirimi gösterir. Güncel sürüm her zaman bu adrestedir.</p>
+
+  <h2>15. Uygulanacak hukuk</h2>
+  <p>Bu koşullar, kanunlar ihtilafı kuralları dikkate alınmaksızın, geliştiricinin ikamet ettiği ülkenin hukukuna tabidir; uygulanabildiği yerde, kendi ülkendeki emredici tüketici koruma hukuku önceliklidir. Bir şeyler ters giderse önce bana e-posta gönder. Dürüst bir konuşma çoğu şeyi mahkemeden daha hızlı çözer.</p>
+
+  <h2>16. İletişim</h2>
+  <p>Mohammad Khakpaki · <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="./">
+        <img src="../assets/favicon.svg" alt="" width="26" height="26">
+        Drachma
+      </a>
+      <nav>
+        <a href="support.html">Destek</a>
+        <a href="privacy.html">Gizlilik politikası</a>
+        <a href="terms.html">Kullanım koşulları</a>
+        <a href="mailto:hi@trydrachma.com">İletişim</a>
+        <a href="../terms.html?lang=en" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Tasarımı gereği çevrimdışı. Para hikâyen hep senin kalır.</p>
+      <p>© 2026 Mohammad Khakpaki.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var order = ["light", "dark", "oled"];
+    var icons = { light: "◐", dark: "◑", oled: "●" };
+    var btn = document.getElementById("themeToggle");
+    function current() { return document.documentElement.getAttribute("data-theme") || "light"; }
+    function apply(t) {
+      if (t === "light") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", t);
+      btn.textContent = icons[t];
+      btn.title = "Tema: " + ({ light: "Açık", dark: "Koyu", oled: "OLED" })[t];
+      try { localStorage.setItem("drachma-theme", t); } catch (e) {}
+    }
+    btn.textContent = icons[current()];
+    btn.addEventListener("click", function () {
+      apply(order[(order.indexOf(current()) + 1) % order.length]);
+    });
+  })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
+</script>
+
+</body>
+</html>

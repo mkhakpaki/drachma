@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gizlilik politikası · Drachma</title>
+  <meta name="description" content="Drachma'nın sade dille yazılmış gizlilik politikası. Para verilerin telefonundan asla çıkmaz: hesap yok, banka bağlantısı yok, sunucu yok. Çıkabilen az şey (isteğe bağlı tanılama verileri) burada eksiksiz listeleniyor.">
+  <link rel="canonical" href="https://trydrachma.com/tr/privacy">
+  <link rel="alternate" hreflang="en" href="https://trydrachma.com/privacy">
+  <link rel="alternate" hreflang="tr" href="https://trydrachma.com/tr/privacy">
+  <link rel="alternate" hreflang="x-default" href="https://trydrachma.com/privacy">
+  <meta name="theme-color" content="#FBF7F0">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search), l = (p.get("lang") || "").toLowerCase(), saved = null;
+      if (l !== "tr" && l !== "en") l = null;
+      try { if (l) localStorage.setItem("drachma-lang", l); saved = localStorage.getItem("drachma-lang"); } catch (e) {}
+      if (!l) l = saved;
+      var had = p.has("lang"); p.delete("lang");
+      var q = p.toString() ? "?" + p.toString() : "";
+      if (l === "en") location.replace("../privacy.html" + q + location.hash);
+      else if (had) history.replaceState(null, "", location.pathname + q + location.hash);
+    })();
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("drachma-theme"); } catch (e) {}
+      if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+      if (t && t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">
+      <img src="../assets/favicon.svg" alt="" width="30" height="30">
+      Drachma
+    </a>
+    <nav class="site-nav">
+      <a href="./#subscriptions">Abonelikler</a>
+      <a class="nav-wide" href="./#features">Özellikler</a>
+      <a href="./#plus">Plus</a>
+      <a class="nav-wide" href="privacy.html">Gizlilik</a>
+      <a href="./#faq">SSS</a>
+      <a class="nav-wide" href="support.html">Destek</a>
+      <a class="lang-toggle" href="../privacy.html?lang=en" hreflang="en" lang="en" title="English" aria-label="English">EN</a>
+      <button class="theme-toggle" id="themeToggle" title="Tema: Açık / Koyu / OLED" aria-label="Temayı değiştir">◐</button>
+      <a class="btn" href="../get/">İndir</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+  <header>
+    <p class="eyebrow">Yasal</p>
+    <h1>Gizlilik politikası</h1>
+    <p class="meta">Sürüm 2026-10 · Son güncelleme: 2 Ekim 2026 · Drachma uygulaması (Android ve iOS) ve bu web sitesi için geçerlidir.</p>
+  </header>
+  <p class="meta">Bu metin, İngilizce sürümün Türkçe çevirisidir. İki metin arasında bir fark olursa İngilizce sürüm esas alınır.</p>
+
+  <div class="callout">
+    <p><b>Kısaca.</b> Para verilerin telefonundan asla çıkmaz. Drachma'da hesap, banka bağlantısı ve verilerini saklayan bir sunucu yok. Girdiğin her şey cihazında şifrelenir. Cihazdan çıkabilecek tek şey isteğe bağlı tanılama verileridir (çökme raporları ve sabit bir listeden anonim kullanım sayıları) ve ikisini de Ayarlar'dan istediğin zaman kapatabilirsin. Tutarları, mağazaları, kategorileri, notları ya da isimleri asla görmeyiz.</p>
+  </div>
+
+  <h2>1. Sorumlu kim</h2>
+  <p>Drachma'yı bağımsız bir geliştirici olan Mohammad Khakpaki yapıyor. Bu politikayla ilgili her konuda <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a> adresine yazabilirsin. Uygulamanın veri işleme süreçlerinden sorumlu kişi benim. Arkasında bir şirket, veri komisyoncusu ya da analitik ekibi yok.</p>
+
+  <h2>2. Tasarım: önce çevrimdışı</h2>
+  <p>Drachma, finansal verilerin sızamayacağı şekilde tasarlandı, çünkü bu veriler hiç toplanmıyor. Uygulamada şunlar yok:</p>
+  <ul>
+    <li>kayıt olma ve kullanıcı hesabı yok,</li>
+    <li>banka bağlantısı ve kimlik bilgisi saklama yok,</li>
+    <li>senkronizasyon hizmeti ve bulut veritabanı yok,</li>
+    <li>reklam ve reklam kimliği yok (reklam kimliği toplama sistem düzeyinde açıkça kapatılmıştır).</li>
+  </ul>
+  <p>Uygulama tamamen çevrimdışı çalışır. İnternet erişimi yalnızca şunlar için var: 5. bölümde anlatılan isteğe bağlı tanılama verileri, ara sıra gösterilen uygulama içi duyurular ve uygulama ayarları (6. bölüm), Drachma Plus satın alırsan aboneliğin kontrol edilmesi (7. bölüm) ve bu sayfa gibi web sayfalarını açmak.</p>
+
+  <h2>3. Cihazında kalanlar</h2>
+  <p>Drachma'ya girdiğin her şey telefonundaki yerel bir veritabanında, SQLCipher (AES-256) ile şifrelenmiş olarak saklanır. Şifreleme anahtarı cihazında üretilir ve cihazının güvenli donanım anahtar deposu tarafından korunur; cihazdan asla çıkmaz ve dışa aktarılamaz. Bu şunları kapsar:</p>
+  <ul>
+    <li>işlemler: tutarlar, para birimi, tarihler, mağazalar, notlar, kalemler ve fiş fotoğrafı referansları,</li>
+    <li>kategoriler, etiketler ve kişisel kategorilendirme kuralların,</li>
+    <li>bütçeler, zarflar, tampon hareketleri ve aylık planlar,</li>
+    <li>hedefler, katkılar, ayırmalar ve bozukluklar,</li>
+    <li>Drachma'nın bulduğu ya da senin eklediğin abonelikler ve taksit planları: isimler, tutarlar, yenileme tarihleri, hangi kayıtların bunlara ait olduğu, iptal işaretleri ve hatırlatma tercihlerin,</li>
+    <li>ürün etiketlerin, öğrenilen isim yazımları ve Drachma'nın öğrendiği düzeltmeler,</li>
+    <li>seriler, XP ve başarımlar,</li>
+    <li>sen gözden geçirirken içe aktarılan ekstre metni (özel olarak tutulur, otomatik olarak temizlenir).</li>
+  </ul>
+  <p>Fiş fotoğrafları uygulamanın özel depolama alanında saklanır; diğer uygulamalar buna erişemez. Tercihlerin (isim, para birimi, tema, hatırlatma seçimleri ve benzerleri) uygulamanın özel ayarlarında tutulur. Android'in uygulama verileri için bulut otomatik yedeklemesi bilerek kapatılmıştır (<code>allowBackup=false</code>); böylece veritabanının bir kopyası, senin istemediğin bir bulut yedeğine kaymaz.</p>
+
+  <h2>4. Hiçbir zaman toplamadıklarımız</h2>
+  <p>Tutar yok. Mağaza yok. Kategori yok. Not ya da açıklama yok. Hedef adı yok. Kişi listesi yok, konum yok, bilerek eklediğin fişler dışında fotoğraf yok (onlar da cihazda kalır). Reklam kimliği yok. Parmak izi takibi (fingerprinting) yok. Drachma, hiçbir üçüncü taraf hizmette hiçbir türde kullanıcı kimliği tanımlamaz.</p>
+
+  <h2>5. İsteğe bağlı tanılama verileri (cihazdan çıkabilecek tek şey)</h2>
+  <p>Drachma, uygulamanın iyi çalışması için Google'ın iki Firebase hizmetini kullanır. İkisi de varsayılan olarak <b>açık</b> ve ikisinin de kendi anahtarı <b>Ayarlar → Verilerin</b> altında. Uygulama bunu ilk kurulum sırasında sana söyler ve ikisinden birini kapatmak anında geçerli olur.</p>
+  <h3>Çökme raporları (Firebase Crashlytics)</h3>
+  <p>Uygulama çökerse, hatayı düzeltebilmek için teknik bir rapor gönderilir: yığın izi (stack trace), cihaz modeli, işletim sistemi sürümü ve uygulama sürümü. Çökme raporları para verilerini asla içermez; zaten uygulamanın çökme bağlamında bu veriler yok.</p>
+  <h3>Kullanım istatistikleri (Firebase Analytics)</h3>
+  <p>Hangi ekranların ve özelliklerin kullanıldığına dair anonim sayımlar; böylece neyin geliştirileceği net olur. Bu olaylar kodda sabit, kapalı bir listeyle sınırlandırılmıştır: uygulamanın analitiğe serbest metin, tutar ya da mağaza adı kaydetmesi fiilen mümkün değil. Listenin tamamı:</p>
+  <table>
+    <tr><th>Olay</th><th>Ne söylüyor (ve başka hiçbir şey)</th></tr>
+    <tr><td>screen_view</td><td>Uygulamanın 13 ekranından hangisinin açıldığı (örn. "home", "budgets", "settings")</td></tr>
+    <tr><td>onboarding_step / onboarding_completed</td><td>İlk kurulum adımlarındaki ilerleme (hangi adım, adıyla)</td></tr>
+    <tr><td>entry_logged</td><td>Yöntem (keypad / scan / import) ve tür (expense / income)</td></tr>
+    <tr><td>scan_completed</td><td>Sonuç (success / cancelled / failed)</td></tr>
+    <tr><td>import_completed</td><td>Sonuç (success / cancelled / failed) ve dosya türü (pdf / csv / xlsx / image)</td></tr>
+    <tr><td>statement_parsed</td><td>İçe aktarılan bir ekstrenin yapısı, içeriği asla: hesap mı kart mı, dosya biçimi, başlığın bulunup bulunmadığı ve bakiyenin tutup tutmadığı, satır sayısı aralığı (örn. 6–20), bir güven düzeyi ve ekstrenin dili</td></tr>
+    <tr><td>merge_resolved</td><td>Yinelenen bir çiftin birleştirilip birleştirilmediği ya da ayrı bırakılıp bırakılmadığı</td></tr>
+    <tr><td>budget_wizard_completed / goal_created</td><td>Yalnızca bunun olduğu. İsim yok, tutar yok</td></tr>
+    <tr><td>export_completed</td><td>Yalnızca bunun olduğu ve biçim (csv / json)</td></tr>
+    <tr><td>backup_created / backup_restored</td><td>Yalnızca bunun olduğu</td></tr>
+    <tr><td>notif_toggled / theme_changed</td><td>Hangi hatırlatmanın değiştirildiği (daily, weekly, pace, goals veya renewals) ve açık mı kapalı mı; hangi temanın seçildiği</td></tr>
+    <tr><td>review_prompt_requested</td><td>Uygulamanın mağazandan puanlama istemini göstermesini istediği, bunu tetikleyen an (örn. "goal milestone") ve istemin açılıp açılmadığı. Drachma puan verip vermediğini ya da kaç puan verdiğini asla öğrenmez.</td></tr>
+    <tr><td>announcement_shown / _cta / _dismissed</td><td>Bir uygulama içi duyurunun nasıl karşılandığı</td></tr>
+  </table>
+  <p>Reklam kimliği toplama ve reklam kişiselleştirme sinyalleri uygulamanın yapılandırmasında kapatılmıştır. Tanılama verileri Google Firebase tarafından Google'ın altyapısında, <a href="https://firebase.google.com/support/privacy">Google'ın Firebase gizlilik şartları</a> kapsamında işlenir.</p>
+
+  <h2>6. Duyurular, uygulama ayarları ve bildirimler</h2>
+  <p>Drachma, Firebase Remote Config'ten alınan ara sıra uygulama içi bildirimler ("yenilikler" ya da zorunlu güncelleme bildirimi) gösterebilir ve Firebase Cloud Messaging üzerinden toplu duyurular alabilir. Bunlar tüm kurulumlara giden tek yönlü yayınlardır: uygulama herkese açık bir "announcements" konusuna abone olur ve push jetonunu bizim tarafımızda hiçbir yere <b>yüklemez</b> ya da saklamaz. Bunu gönderebileceğimiz bir sunucumuz da yok. Hangi duyuruları kapattığın yalnızca cihazında hatırlanır.</p>
+  <p>Aynı Remote Config kanalı birkaç uygulama ayarını da iletir: Drachma'nın ekstreleri okurken kullandığı sözcük dağarcığındaki güncellemeler, Free planın kotaları ve uygulamayı puanlamanın ne zaman önerileceği. Bu tek yönlü bir indirmedir; senin ya da verilerinle ilgili hiçbir şey geri gönderilmez.</p>
+  <p>Günlük bildirimler telefonunda yerel olarak üretilir ve hiçbir şekilde ağ kullanmaz: günlük kayıt hatırlatması, haftalık özet, bütçe tempo notları, hedef kutlamaları, abonelik yenileme hatırlatmaları (Drachma Plus) ve iptal edildi olarak işaretlediğin bir abonelik seni yeniden ücretlendirirse gelen uyarı. Saat 22:00 ile 08:00 arasına denk gelen planlı hatırlatmalar 08:00'e kadar bekler, tempo notları ise bu saatlerde atlanır.</p>
+
+  <h2>7. Drachma Plus satın alımları (Adapty)</h2>
+  <p>Drachma Plus'a abone olursan ödemeyi tamamen uygulama mağazan (Google Play ya da App Store) kendi şartlarına göre yürütür; Drachma kart ya da banka bilgilerini asla görmez. Plus'ın etkin olup olmadığını bilmek için uygulama, bir abonelik yönetim hizmeti olan Adapty'yi kullanır. Adapty, mağazanın satın alma bilgilerini (ürün kimliği, işlem kimliği, abonelik fiyatı ve para birimi, deneme ve yenileme durumu) ve temel cihaz bilgilerini (model, işletim sistemi ve uygulama sürümü, yerel ayar) alır; bunlar rastgele, kuruluma özgü bir tanımlayıcıya bağlıdır, asla adına, e-postana ya da uygulamaya yazdığın herhangi bir şeye bağlı değildir. Bütçe verilerini asla almaz: kaydettiğin tutarlar, mağazalar, kategoriler, hedef adları yok. Abonelik durumu kontrol edilemezse (çevrimdışısın, mağazada bir aksaklık var), Drachma sessizce Free plana döner ve seni kendi rakamlarına erişimden asla kilitlemez. Adapty bu verileri <a href="https://adapty.io/privacy/">Adapty'nin gizlilik politikası</a> kapsamında işler.</p>
+
+  <h2>8. Yedekler: sahibi olduğun dosyalar</h2>
+  <p>Yedek oluşturduğunda Drachma, seçtiğin bir konuma tek bir <b>.drachma</b> dosyası yazar. Dosya AES-256-GCM şifrelemesiyle mühürlenir; anahtar, senin belirlediğin bir paroladan türetilir (PBKDF2-SHA256, 210.000 yineleme, en az 8 karakter). Uygulama bu dosyayı asla iletmez. Kendi bulut sürücüne kaydedersen, bu senin ve bulut sağlayıcın arasında bir konudur. Parolan olmadan dosyayı ben dahil kimse açamaz. Fiş fotoğrafları yedeklere dahil değildir.</p>
+
+  <h2>9. Dışa aktarmalar: bilerek düz dosyalar</h2>
+  <p>Verilerinin tamamını Ayarlar'dan CSV ya da JSON olarak dışa aktarabilir ve seçtiğin bir konuma kaydedebilirsin. Dışa aktarmalar <b>bilerek şifrelenmez</b>; çünkü elektronik tablolar ve kendi arşivlerin için hazırlanırlar ve uygulama, dışa aktardığında seni tam olarak bu konuda uyarır. Onlara, gerçekte oldukları gibi, özel belgeler olarak davran.</p>
+
+  <h2>10. Fiş tarama ve ekstre aktarımı</h2>
+  <p>Fiş metninin tanınması tamamen cihazında, uygulamayla birlikte gelen çevrimdışı bir OCR modeliyle çalışır. Kamera yakalama ekranı telefonunun kendi belge tarayıcısıdır (Android'de Google Play hizmetleri, iPhone'da Apple'ınki) ve cihaz üzerinde çalışır; Play hizmetleri tarayıcı modülünü bir kez indirebilir. Banka ekstreleri (PDF, CSV, elektronik tablolar) ve e-faturalar yerelde ayrıştırılır; parola korumalı PDF'ler yazdığın parolayla yerelde açılır, bu parola bellekte kullanılır ve saklanmaz.</p>
+  <p>Abonelikleri ve taksit planlarını bulma işi de cihazında gerçekleşir: Drachma senin kendi kayıtlarını birbiriyle ve uygulamaya yerleşik bilinen hizmetler listesiyle karşılaştırır. Hiçbir fiş görüntüsü, ekstre içeriği, tanınan metin ya da tespit edilen abonelik asla iletilmez.</p>
+
+  <h2>11. İzinler</h2>
+  <ul>
+    <li><b>İnternet</b>: yalnızca yukarıda anlatılan tanılama verileri, duyurular, uygulama ayarları, Plus abonelik kontrolü ve web sayfaları için kullanılır.</li>
+    <li><b>Bildirimler</b>: yalnızca ilk bildirimi hak ettiğinde ya da bir hatırlatmayı açtığında istenir, uygulama açılırken asla. Reddetmen, sadece hatırlatma almayacağın anlamına gelir.</li>
+    <li><b>Kamera</b>: yalnızca fiş tararken kullanılır. Telefonunun tarayıcısı kamera erişimi gerektiriyorsa, telefonun önce sana sorar.</li>
+    <li>Drachma depolama, konum ya da kişiler izni <b>istemez</b>. Fotoğraf ve dosya seçmek, bunları gerektirmeyen sistem bileşenleriyle yapılır.</li>
+  </ul>
+
+  <h2>12. Verilerin saklanması ve silinmesi</h2>
+  <p>Verilerin, sen tuttuğun sürece yaşar. Uygulamada istediğin kaydı sil ya da uygulamayı kaldırarak her şeyi sil: şifreli veritabanı ve donanıma bağlı anahtarı uygulamayla birlikte yok edilir ve peşinden koşulacak sunucu tarafı bir kopya yoktur. Oluşturduğun yedekler ve dışa aktarmalar sana aittir; koyduğun yerde saklamak ya da silmek senin elinde. Daha önce gönderilmiş tanılama verileri Firebase tarafından standart, sınırlı sürelerle saklanır ve kimliğine bağlı değildir. Abonelik kayıtları, aboneliği yönetmek için gerektiği sürece uygulama mağazanda ve Adapty'de durur.</p>
+
+  <h2>13. Hakların</h2>
+  <p>GDPR gibi gizlilik yasaları sana erişim, taşınabilirlik, düzeltme ve silme hakları verir. Drachma'nın tasarımı sayesinde bunların neredeyse hepsini doğrudan kullanırsın: verilerin cihazında, CSV/JSON olarak eksiksiz dışa aktarılabilir, uygulamada düzenlenebilir ve uygulamayı kaldırarak silinir. Tanılama verileriyle ilgili her konuda, "benimle ilgili hiçbir şeyin kalmadığından emin olun" gibi talepler dahil, <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a> adresine e-posta gönder.</p>
+
+  <h2>14. Çocuklar</h2>
+  <p>Drachma 13 yaşın altındaki çocuklara (ya da ülkendeki eşdeğer asgari yaşın altındakilere) yönelik değildir ve çocuklardan bilerek kişisel veri toplamam; tasarım gereği uygulama kimseden neredeyse hiç kişisel veri toplamaz. Bir çocuğun uygulamayı kullandığını düşünüyorsan ve bir şey seni endişelendiriyorsa, lütfen benimle iletişime geç.</p>
+
+  <h2>15. Bu politikadaki değişiklikler</h2>
+  <p>Bu politika esaslı biçimde değişirse uygulama sana söyler: kabul ettiğin sürümü takip eder ve güncellemeyi okuyup kabul edene kadar Ayarlar'da bir inceleme bildirimi gösterir. Güncel sürüm her zaman bu sayfanın en üstünde ve bu adrestedir.</p>
+
+  <h2>16. İletişim</h2>
+  <p>Mohammad Khakpaki · <a href="mailto:hi@trydrachma.com">hi@trydrachma.com</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="./">
+        <img src="../assets/favicon.svg" alt="" width="26" height="26">
+        Drachma
+      </a>
+      <nav>
+        <a href="support.html">Destek</a>
+        <a href="privacy.html">Gizlilik politikası</a>
+        <a href="terms.html">Kullanım koşulları</a>
+        <a href="mailto:hi@trydrachma.com">İletişim</a>
+        <a href="../privacy.html?lang=en" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Tasarımı gereği çevrimdışı. Para hikâyen hep senin kalır.</p>
+      <p>© 2026 Mohammad Khakpaki.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var order = ["light", "dark", "oled"];
+    var icons = { light: "◐", dark: "◑", oled: "●" };
+    var btn = document.getElementById("themeToggle");
+    function current() { return document.documentElement.getAttribute("data-theme") || "light"; }
+    function apply(t) {
+      if (t === "light") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", t);
+      btn.textContent = icons[t];
+      btn.title = "Tema: " + ({ light: "Açık", dark: "Koyu", oled: "OLED" })[t];
+      try { localStorage.setItem("drachma-theme", t); } catch (e) {}
+    }
+    btn.textContent = icons[current()];
+    btn.addEventListener("click", function () {
+      apply(order[(order.indexOf(current()) + 1) % order.length]);
+    });
+  })();
+</script>
+
+<script>
+  // A language switch replaces this page in history, so Back doesn't land on a page that redirects away.
+  document.querySelectorAll("a[hreflang]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      location.replace(a.href);
+    });
+  });
+</script>
+
+</body>
+</html>
